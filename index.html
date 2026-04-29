@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional JD Generator</title>
+    <title>Advanced JD Generator Pro</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -11,7 +11,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-gray);
             margin: 0;
             display: flex;
@@ -20,47 +20,59 @@
 
         /* Sidebar Form */
         .sidebar {
-            width: 400px;
+            width: 450px;
             background: white;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
             overflow-y: auto;
             z-index: 10;
         }
 
-        h2 { color: #1f2937; margin-top: 0; }
+        h2, h3 { color: #1f2937; margin-top: 0; }
+        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
         
-        .form-group { margin-bottom: 15px; }
+        .form-group { margin-bottom: 18px; }
         
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #374151;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #4b5563;
+            text-transform: uppercase;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #d1d5db;
-            border-radius: 4px;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 14px;
         }
 
-        .btn-generate {
+        .heading-edit {
+            background: #f9fafb;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-style: dashed;
+        }
+
+        .btn {
             width: 100%;
             padding: 12px;
-            background: var(--primary-color);
-            color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             margin-top: 10px;
+            transition: 0.2s;
         }
 
-        .btn-generate:hover { opacity: 0.9; }
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-add { background: #f3f4f6; color: #374151; border: 1px dashed #9ca3af; }
+        .btn-add:hover { background: #e5e7eb; }
+        .btn-delete { background: #fee2e2; color: #dc2626; width: auto; padding: 5px 10px; font-size: 12px; }
 
         /* Preview Area */
         .preview-container {
@@ -69,199 +81,252 @@
             overflow-y: auto;
             display: flex;
             justify-content: center;
+            background: #e5e7eb;
         }
 
         .jd-paper {
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             background: white;
-            min-height: 1000px;
-            padding: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-top: 10px solid var(--primary-color);
+            min-height: 1100px;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-top: 12px solid var(--primary-color);
+            position: relative;
         }
 
-        /* JD Styling */
-        .jd-header { border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
-        .company-name { font-size: 1.2em; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-        .job-title { font-size: 2.5em; color: var(--primary-color); margin: 10px 0; }
-        .tag-container { display: flex; gap: 10px; margin-top: 10px; }
-        .tag { background: #f0f7ff; color: var(--primary-color); padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: 500; }
+        /* JD Layout Elements */
+        .jd-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .logo-preview { max-width: 150px; max-height: 80px; object-fit: contain; margin-bottom: 15px; display: none; }
         
-        .section-title { color: var(--primary-color); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; }
-        .content { line-height: 1.6; color: #4b5563; }
+        .job-title { font-size: 2.8em; color: var(--primary-color); margin: 5px 0; font-weight: 800; line-height: 1.1; }
+        .company-name { font-size: 1.3em; color: #6b7280; font-weight: 500; }
+        
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { background: #eff6ff; color: var(--primary-color); padding: 6px 14px; border-radius: 4px; font-size: 0.85em; font-weight: 600; border: 1px solid #dbeafe; }
+        
+        .section-title { 
+            color: var(--primary-color); 
+            border-bottom: 2px solid #f3f4f6; 
+            padding-bottom: 8px; 
+            margin-top: 35px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1em;
+        }
+        
+        .content { line-height: 1.7; color: #374151; font-size: 1.05em; white-space: pre-wrap; }
+        .content ul { padding-left: 20px; }
         
         .incentive-box { 
-            background: #fafafa; 
-            padding: 15px; 
-            border-left: 4px solid var(--primary-color);
-            margin-top: 20px;
+            background: #f8fafc; 
+            padding: 20px; 
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            margin-top: 30px;
+        }
+
+        .dynamic-section-sidebar {
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            position: relative;
         }
 
         @media print {
             .sidebar { display: none; }
-            .preview-container { padding: 0; }
-            .jd-paper { box-shadow: none; border: none; }
+            .preview-container { padding: 0; background: white; }
+            .jd-paper { box-shadow: none; border: none; width: 100%; max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <h2>JD Builder</h2>
+    <h2>JD Master</h2>
     
     <div class="form-group">
         <label>Theme Color</label>
-        <input type="color" id="themeColor" value="#2563eb" onchange="updateColor()">
+        <input type="color" id="themeColor" value="#2563eb" onchange="updateStyles()">
     </div>
 
     <div class="form-group">
-        <label>Organization Name</label>
-        <input type="text" id="orgName" placeholder="e.g. Acme Corp">
+        <label>Company Logo</label>
+        <input type="file" id="logoInput" accept="image/*" onchange="handleLogo(this)">
     </div>
 
     <div class="form-group">
-        <label>Role Title</label>
-        <input type="text" id="roleTitle" placeholder="e.g. Frontend Developer">
+        <label>Organization & Role</label>
+        <input type="text" id="orgName" placeholder="Organization Name" oninput="updatePreview()">
+        <input type="text" id="roleTitle" placeholder="Job Title (e.g. Lead Designer)" style="margin-top:8px" oninput="updatePreview()">
     </div>
 
     <div class="form-group">
-        <label>Role Type</label>
-        <select id="roleType">
+        <label>Metadata</label>
+        <select id="roleType" onchange="updatePreview()">
             <option value="Full Time">Full Time</option>
             <option value="Internship">Internship</option>
             <option value="Apprenticeship">Apprenticeship</option>
-            <option value="Fellowship">Fellowship</option>
-            <option value="Articleship">Articleship</option>
+            <option value="Full Time">Articleship</option>
             <option value="Volunteering">Volunteering</option>
         </select>
-    </div>
-
-    <div class="form-group">
-        <label>Nature</label>
-        <select id="nature" onchange="toggleLocation()">
+        <select id="nature" onchange="toggleLocation()" style="margin-top:8px">
             <option value="In-Office">In-Office</option>
             <option value="Hybrid">Hybrid</option>
             <option value="Work from Home">Work from Home</option>
         </select>
+        <input type="text" id="location" placeholder="City, Country" style="margin-top:8px" oninput="updatePreview()">
     </div>
 
-    <div class="form-group" id="locationGroup">
-        <label>Location</label>
-        <input type="text" id="location" placeholder="e.g. New York, NY">
+    <hr>
+    
+    <h3>Sections</h3>
+    <div id="dynamicSectionsContainer">
+        <div class="dynamic-section-sidebar">
+            <input type="text" class="heading-edit" value="About the Role" oninput="updatePreview()">
+            <textarea placeholder="Tell them about the mission..." rows="3" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="dynamic-section-sidebar">
+            <input type="text" class="heading-edit" value="Key Responsibilities" oninput="updatePreview()">
+            <textarea placeholder="List core tasks (use bullet points)..." rows="3" oninput="updatePreview()"></textarea>
+        </div>
     </div>
+
+    <button class="btn btn-add" onclick="addNewSection()">+ Add Custom Section</button>
+
+    <hr>
 
     <div class="form-group">
-        <label>Incentives</label>
-        <input type="text" id="stipend" placeholder="Stipend (e.g. $500/mo)">
-        <input type="text" id="ctc" placeholder="CTC (e.g. $80k/year)" style="margin-top:5px">
+        <label>Incentives & Pay</label>
+        <input type="text" id="stipend" placeholder="Stipend (e.g. ₹20,000/mo)" oninput="updatePreview()">
+        <input type="text" id="ctc" placeholder="Annual CTC (e.g. 12 LPA)" style="margin-top:8px" oninput="updatePreview()">
     </div>
 
-    <div class="form-group">
-        <label>Job Overview</label>
-        <textarea id="overview" rows="3"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label>Responsibilities (One per line)</label>
-        <textarea id="responsibilities" rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label>Requirements (One per line)</label>
-        <textarea id="requirements" rows="4"></textarea>
-    </div>
-
-    <button class="btn-generate" onclick="generateJD()">Update Preview</button>
-    <button class="btn-generate" style="background: #10b981;" onclick="window.print()">Download as PDF</button>
+    <button class="btn btn-primary" onclick="window.print()">Export to PDF</button>
 </div>
 
 <div class="preview-container">
     <div class="jd-paper" id="jdContent">
         <div class="jd-header">
-            <div class="company-name" id="pOrgName">ORGANIZATION NAME</div>
-            <h1 class="job-title" id="pTitle">Job Role Title</h1>
-            <div class="tag-container" id="pTags">
-                <span class="tag">Full Time</span>
-                <span class="tag">Remote</span>
+            <div style="max-width: 70%;">
+                <div class="company-name" id="pOrgName">ORGANIZATION</div>
+                <h1 class="job-title" id="pTitle">Role Title</h1>
+                <div class="tag-container" id="pTags"></div>
             </div>
+            <img id="pLogo" class="logo-preview" src="" alt="logo">
         </div>
 
-        <h3 class="section-title">About the Role</h3>
-        <p class="content" id="pOverview">Select options on the left to begin generating your professional job description.</p>
+        <div id="pDynamicContent">
+            </div>
 
-        <h3 class="section-title">Key Responsibilities</h3>
-        <ul class="content" id="pResList">
-            <li>Responsibility details will appear here.</li>
-        </ul>
-
-        <h3 class="section-title">What We're Looking For</h3>
-        <ul class="content" id="pReqList">
-            <li>Requirement details will appear here.</li>
-        </ul>
-
-        <div class="incentive-box" id="pIncentives">
-            <strong>Incentives:</strong><br>
-            <span id="pStipendText"></span><br>
-            <span id="pCtcText"></span>
+        <div class="incentive-box" id="pIncentiveBox" style="display: none;">
+            <strong id="pIncHeading" style="color: var(--primary-color)">COMPENSATION & BENEFITS</strong>
+            <p class="content" id="pIncentiveText" style="margin-top:10px;"></p>
         </div>
     </div>
 </div>
 
 <script>
-    function updateColor() {
+    function updateStyles() {
         const color = document.getElementById('themeColor').value;
         document.documentElement.style.setProperty('--primary-color', color);
     }
 
-    function toggleLocation() {
-        const nature = document.getElementById('nature').value;
-        const locGroup = document.getElementById('locationGroup');
-        locGroup.style.display = (nature === 'Work from Home') ? 'none' : 'block';
+    function handleLogo(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('pLogo');
+                img.src = e.target.result;
+                img.style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
-    function generateJD() {
-        // Basic Info
-        document.getElementById('pOrgName').innerText = document.getElementById('orgName').value || "Your Company Name";
+    function toggleLocation() {
+        const nature = document.getElementById('nature').value;
+        const loc = document.getElementById('location');
+        loc.style.display = (nature === 'Work from Home') ? 'none' : 'block';
+        updatePreview();
+    }
+
+    function addNewSection() {
+        const container = document.getElementById('dynamicSectionsContainer');
+        const div = document.createElement('div');
+        div.className = 'dynamic-section-sidebar';
+        div.innerHTML = `
+            <button class="btn btn-delete" onclick="this.parentElement.remove(); updatePreview();" style="position:absolute; right:10px; top:10px;">Remove</button>
+            <input type="text" class="heading-edit" value="New Section" oninput="updatePreview()">
+            <textarea placeholder="Enter content here..." rows="3" oninput="updatePreview()"></textarea>
+        `;
+        container.appendChild(div);
+        updatePreview();
+    }
+
+    function updatePreview() {
+        // Header Info
+        document.getElementById('pOrgName').innerText = document.getElementById('orgName').value || "ORGANIZATION";
         document.getElementById('pTitle').innerText = document.getElementById('roleTitle').value || "Job Role Title";
-        
+
         // Tags
         const tags = [
             document.getElementById('roleType').value,
-            document.getElementById('nature').value,
-            document.getElementById('location').value
-        ].filter(t => t && t !== 'Work from Home');
+            document.getElementById('nature').value
+        ];
+        if(document.getElementById('nature').value !== 'Work from Home') {
+            tags.push(document.getElementById('location').value);
+        }
         
         const tagContainer = document.getElementById('pTags');
         tagContainer.innerHTML = '';
-        tags.forEach(t => {
+        tags.filter(t => t).forEach(t => {
             const span = document.createElement('span');
             span.className = 'tag';
             span.innerText = t;
             tagContainer.appendChild(span);
         });
 
-        // Overview
-        document.getElementById('pOverview').innerText = document.getElementById('overview').value || "No overview provided.";
-
-        // Lists
-        const formatList = (inputId, targetId) => {
-            const lines = document.getElementById(inputId).value.split('\n').filter(l => l.trim() !== '');
-            const target = document.getElementById(targetId);
-            target.innerHTML = lines.length ? lines.map(l => `<li>${l}</li>`).join('') : '<li>Details not provided.</li>';
-        };
-
-        formatList('responsibilities', 'pResList');
-        formatList('requirements', 'pReqList');
+        // Dynamic Sections
+        const pContent = document.getElementById('pDynamicContent');
+        pContent.innerHTML = '';
+        const sections = document.querySelectorAll('.dynamic-section-sidebar');
+        
+        sections.forEach(sec => {
+            const heading = sec.querySelector('input').value;
+            const text = sec.querySelector('textarea').value;
+            
+            if(heading || text) {
+                const sectionWrap = document.createElement('div');
+                sectionWrap.innerHTML = `
+                    <h3 class="section-title">${heading}</h3>
+                    <div class="content">${text}</div>
+                `;
+                pContent.appendChild(sectionWrap);
+            }
+        });
 
         // Incentives
         const stipend = document.getElementById('stipend').value;
         const ctc = document.getElementById('ctc').value;
-        document.getElementById('pStipendText').innerText = stipend ? `Stipend: ${stipend}` : '';
-        document.getElementById('pCtcText').innerText = ctc ? `CTC: ${ctc}` : '';
-        
-        document.getElementById('pIncentives').style.display = (stipend || ctc) ? 'block' : 'none';
+        const incBox = document.getElementById('pIncentiveBox');
+        const incText = document.getElementById('pIncentiveText');
+
+        if(stipend || ctc) {
+            incBox.style.display = 'block';
+            let html = '';
+            if(stipend) html += `• <strong>Stipend:</strong> ${stipend}<br>`;
+            if(ctc) html += `• <strong>CTC:</strong> ${ctc}`;
+            incText.innerHTML = html;
+        } else {
+            incBox.style.display = 'none';
+        }
     }
+
+    // Initialize
+    updatePreview();
 </script>
 
 </body>
