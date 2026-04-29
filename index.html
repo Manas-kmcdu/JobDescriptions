@@ -2,332 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced JD Generator Pro</title>
+    <title>Professional JD Generator Tool</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --bg-gray: #f3f4f6;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-gray);
-            margin: 0;
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar Form */
-        .sidebar {
-            width: 450px;
-            background: white;
-            padding: 25px;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            z-index: 10;
-        }
-
-        h2, h3 { color: #1f2937; margin-top: 0; }
-        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
-        
-        .form-group { margin-bottom: 18px; }
-        
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #4b5563;
-            text-transform: uppercase;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .heading-edit {
-            background: #f9fafb;
-            font-weight: bold;
-            margin-bottom: 5px;
-            border-style: dashed;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: 0.2s;
-        }
-
-        .btn-primary { background: var(--primary-color); color: white; }
-        .btn-add { background: #f3f4f6; color: #374151; border: 1px dashed #9ca3af; }
-        .btn-add:hover { background: #e5e7eb; }
-        .btn-delete { background: #fee2e2; color: #dc2626; width: auto; padding: 5px 10px; font-size: 12px; }
-
-        /* Preview Area */
-        .preview-container {
-            flex-grow: 1;
-            padding: 40px;
-            overflow-y: auto;
-            display: flex;
-            justify-content: center;
-            background: #e5e7eb;
-        }
-
-        .jd-paper {
-            width: 100%;
-            max-width: 850px;
-            background: white;
-            min-height: 1100px;
-            padding: 60px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-top: 12px solid var(--primary-color);
-            position: relative;
-        }
-
-        /* JD Layout Elements */
-        .jd-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-        .logo-preview { max-width: 150px; max-height: 80px; object-fit: contain; margin-bottom: 15px; display: none; }
-        
-        .job-title { font-size: 2.8em; color: var(--primary-color); margin: 5px 0; font-weight: 800; line-height: 1.1; }
-        .company-name { font-size: 1.3em; color: #6b7280; font-weight: 500; }
-        
-        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tag { background: #eff6ff; color: var(--primary-color); padding: 6px 14px; border-radius: 4px; font-size: 0.85em; font-weight: 600; border: 1px solid #dbeafe; }
-        
-        .section-title { 
-            color: var(--primary-color); 
-            border-bottom: 2px solid #f3f4f6; 
-            padding-bottom: 8px; 
-            margin-top: 35px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.1em;
-        }
-        
-        .content { line-height: 1.7; color: #374151; font-size: 1.05em; white-space: pre-wrap; }
-        .content ul { padding-left: 20px; }
-        
-        .incentive-box { 
-            background: #f8fafc; 
-            padding: 20px; 
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-            margin-top: 30px;
-        }
-
-        .dynamic-section-sidebar {
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        @media print {
-            .sidebar { display: none; }
-            .preview-container { padding: 0; background: white; }
-            .jd-paper { box-shadow: none; border: none; width: 100%; max-width: 100%; }
-        }
+        :root { --primary: #002060; --gray: #f8fafc; }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; margin: 0; background: #e2e8f0; height: 100vh; overflow: hidden; }
+        .sidebar { width: 450px; background: white; padding: 25px; overflow-y: auto; box-shadow: 5px 0 15px rgba(0,0,0,0.1); z-index: 10; }
+        .preview { flex: 1; padding: 40px; overflow-y: auto; display: flex; justify-content: center; position: relative; }
+        .paper { width: 100%; max-width: 800px; background: white; padding: 60px; height: auto; min-height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
+        .section-input { background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 10px; position: relative; }
+        .tag { background: #eef2ff; color: var(--primary); padding: 5px 12px; border-radius: 4px; font-size: 13px; font-weight: bold; margin-right: 5px; }
+        .jd-section-h { color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .inc-box { background: #f8fafc; padding: 20px; border-left: 5px solid var(--primary); margin-top: 30px; }
+        #pLogo { max-height: 80px; max-width: 150px; display: none; margin-bottom: 20px; }
+        @media print { .sidebar { display: none; } .preview { background: white; padding: 0; } .paper { box-shadow: none; border: none; } }
     </style>
 </head>
 <body>
-
-<div class="sidebar">
-    <h2>JD Master</h2>
-    
-    <div class="form-group">
-        <label>Theme Color</label>
-        <input type="color" id="themeColor" value="#2563eb" onchange="updateStyles()">
-    </div>
-
-    <div class="form-group">
-        <label>Company Logo</label>
-        <input type="file" id="logoInput" accept="image/*" onchange="handleLogo(this)">
-    </div>
-
-    <div class="form-group">
-        <label>Organization & Role</label>
-        <input type="text" id="orgName" placeholder="Organization Name" oninput="updatePreview()">
-        <input type="text" id="roleTitle" placeholder="Job Title (e.g. Lead Designer)" style="margin-top:8px" oninput="updatePreview()">
-    </div>
-
-    <div class="form-group">
-        <label>Metadata</label>
-        <select id="roleType" onchange="updatePreview()">
-            <option value="Full Time">Full Time</option>
-            <option value="Internship">Internship</option>
-            <option value="Apprenticeship">Apprenticeship</option>
-            <option value="Full Time">Articleship</option>
-            <option value="Volunteering">Volunteering</option>
-        </select>
-        <select id="nature" onchange="toggleLocation()" style="margin-top:8px">
-            <option value="In-Office">In-Office</option>
-            <option value="Hybrid">Hybrid</option>
-            <option value="Work from Home">Work from Home</option>
-        </select>
-        <input type="text" id="location" placeholder="City, Country" style="margin-top:8px" oninput="updatePreview()">
-    </div>
-
-    <hr>
-    
-    <h3>Sections</h3>
-    <div id="dynamicSectionsContainer">
-        <div class="dynamic-section-sidebar">
-            <input type="text" class="heading-edit" value="About the Role" oninput="updatePreview()">
-            <textarea placeholder="Tell them about the mission..." rows="3" oninput="updatePreview()"></textarea>
-        </div>
-
-        <div class="dynamic-section-sidebar">
-            <input type="text" class="heading-edit" value="Key Responsibilities" oninput="updatePreview()">
-            <textarea placeholder="List core tasks (use bullet points)..." rows="3" oninput="updatePreview()"></textarea>
-        </div>
-    </div>
-
-    <button class="btn btn-add" onclick="addNewSection()">+ Add Custom Section</button>
-
-    <hr>
-
-    <div class="form-group">
-        <label>Incentives & Pay</label>
-        <input type="text" id="stipend" placeholder="Stipend (e.g. ₹20,000/mo)" oninput="updatePreview()">
-        <input type="text" id="ctc" placeholder="Annual CTC (e.g. 12 LPA)" style="margin-top:8px" oninput="updatePreview()">
-    </div>
-
-    <button class="btn btn-primary" onclick="window.print()">Export to PDF</button>
-</div>
-
-<div class="preview-container">
-    <div class="jd-paper" id="jdContent">
-        <div class="jd-header">
-            <div style="max-width: 70%;">
-                <div class="company-name" id="pOrgName">ORGANIZATION</div>
-                <h1 class="job-title" id="pTitle">Role Title</h1>
-                <div class="tag-container" id="pTags"></div>
-            </div>
-            <img id="pLogo" class="logo-preview" src="" alt="logo">
-        </div>
-
-        <div id="pDynamicContent">
-            </div>
-
-        <div class="incentive-box" id="pIncentiveBox" style="display: none;">
-            <strong id="pIncHeading" style="color: var(--primary-color)">COMPENSATION & BENEFITS</strong>
-            <p class="content" id="pIncentiveText" style="margin-top:10px;"></p>
-        </div>
-    </div>
-</div>
-
-<script>
-    function updateStyles() {
-        const color = document.getElementById('themeColor').value;
-        document.documentElement.style.setProperty('--primary-color', color);
-    }
-
-    function handleLogo(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById('pLogo');
-                img.src = e.target.result;
-                img.style.display = 'block';
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function toggleLocation() {
-        const nature = document.getElementById('nature').value;
-        const loc = document.getElementById('location');
-        loc.style.display = (nature === 'Work from Home') ? 'none' : 'block';
-        updatePreview();
-    }
-
-    function addNewSection() {
-        const container = document.getElementById('dynamicSectionsContainer');
-        const div = document.createElement('div');
-        div.className = 'dynamic-section-sidebar';
-        div.innerHTML = `
-            <button class="btn btn-delete" onclick="this.parentElement.remove(); updatePreview();" style="position:absolute; right:10px; top:10px;">Remove</button>
-            <input type="text" class="heading-edit" value="New Section" oninput="updatePreview()">
-            <textarea placeholder="Enter content here..." rows="3" oninput="updatePreview()"></textarea>
-        `;
-        container.appendChild(div);
-        updatePreview();
-    }
-
-    function updatePreview() {
-        // Header Info
-        document.getElementById('pOrgName').innerText = document.getElementById('orgName').value || "ORGANIZATION";
-        document.getElementById('pTitle').innerText = document.getElementById('roleTitle').value || "Job Role Title";
-
-        // Tags
-        const tags = [
-            document.getElementById('roleType').value,
-            document.getElementById('nature').value
-        ];
-        if(document.getElementById('nature').value !== 'Work from Home') {
-            tags.push(document.getElementById('location').value);
-        }
+    <div class="sidebar">
+        <h2>JD Builder</h2>
+        <div class="form-group"><label>Logo</label><input type="file" accept="image/*" onchange="readLogo(this)"></div>
+        <div class="form-group"><label>Theme Color</label><input type="color" id="color" value="#002060" oninput="sync()"></div>
+        <div class="form-group"><label>Organization</label><input type="text" id="org" placeholder="Acme Corp" oninput="sync()"></div>
+        <div class="form-group"><label>Role Title</label><input type="text" id="role" placeholder="Senior Analyst" oninput="sync()"></div>
+        <div class="form-group"><label>Role Type</label><select id="type" onchange="sync()"><option>Full Time</option><option>Internship</option><option>Apprenticeship</option><option>Fellowship</option><option>Articleship</option><option>Volunteering</option></select></div>
+        <div class="form-group"><label>Nature</label><select id="nature" onchange="sync()"><option>In-Office</option><option>Hybrid</option><option>Work from Home</option></select></div>
+        <div class="form-group"><label>Location</label><input type="text" id="loc" placeholder="New York, NY" oninput="sync()"></div>
         
-        const tagContainer = document.getElementById('pTags');
-        tagContainer.innerHTML = '';
-        tags.filter(t => t).forEach(t => {
-            const span = document.createElement('span');
-            span.className = 'tag';
-            span.innerText = t;
-            tagContainer.appendChild(span);
-        });
-
-        // Dynamic Sections
-        const pContent = document.getElementById('pDynamicContent');
-        pContent.innerHTML = '';
-        const sections = document.querySelectorAll('.dynamic-section-sidebar');
+        <hr><label>Pre-Incentive Sections</label>
+        <div id="topSections"></div>
+        <button class="btn" style="background:#64748b; font-size:12px;" onclick="addSec('topSections')">+ Add Section</button>
         
-        sections.forEach(sec => {
-            const heading = sec.querySelector('input').value;
-            const text = sec.querySelector('textarea').value;
+        <hr><div class="form-group"><label>Incentives</label><input type="text" id="stipend" placeholder="Stipend: ₹50,000/mo" oninput="sync()"><input type="text" id="ctc" placeholder="CTC: 12 LPA" style="margin-top:5px" oninput="sync()"></div>
+        
+        <hr><label>Post-Incentive Sections</label>
+        <div id="botSections"></div>
+        <button class="btn" style="background:#64748b; font-size:12px;" onclick="addSec('botSections')">+ Add Section</button>
+        
+        <button class="btn" style="margin-top:30px; background:#10b981;" onclick="window.print()">Export to PDF</button>
+    </div>
+
+    <div class="preview">
+        <div class="paper">
+            <img id="pLogo">
+            <div id="pOrg" style="font-size: 20px; color: #666; font-weight: 500;">ORGANIZATION</div>
+            <h1 id="pTitle" style="font-size: 48px; margin: 5px 0;">Role Title</h1>
+            <div id="pMeta" style="margin-top:15px;"></div>
+            <div id="pTop"></div>
+            <div id="pInc" class="inc-box" style="display:none"><strong>Incentives & Compensation</strong><p id="pIncText" style="white-space:pre-wrap;"></p></div>
+            <div id="pBot"></div>
+        </div>
+    </div>
+
+    <script>
+        function sync() {
+            const col = document.getElementById('color').value;
+            document.documentElement.style.setProperty('--primary', col);
+            document.getElementById('pOrg').innerText = document.getElementById('org').value || 'ORGANIZATION';
+            document.getElementById('pTitle').innerText = document.getElementById('role').value || 'Role Title';
+            document.getElementById('pTitle').style.color = col;
             
-            if(heading || text) {
-                const sectionWrap = document.createElement('div');
-                sectionWrap.innerHTML = `
-                    <h3 class="section-title">${heading}</h3>
-                    <div class="content">${text}</div>
-                `;
-                pContent.appendChild(sectionWrap);
-            }
-        });
-
-        // Incentives
-        const stipend = document.getElementById('stipend').value;
-        const ctc = document.getElementById('ctc').value;
-        const incBox = document.getElementById('pIncentiveBox');
-        const incText = document.getElementById('pIncentiveText');
-
-        if(stipend || ctc) {
-            incBox.style.display = 'block';
-            let html = '';
-            if(stipend) html += `• <strong>Stipend:</strong> ${stipend}<br>`;
-            if(ctc) html += `• <strong>CTC:</strong> ${ctc}`;
-            incText.innerHTML = html;
-        } else {
-            incBox.style.display = 'none';
+            const meta = [document.getElementById('type').value, document.getElementById('nature').value, document.getElementById('loc').value].filter(t => t);
+            document.getElementById('pMeta').innerHTML = meta.map(m => `<span class="tag" style="background:${col}15; color:${col}">${m}</span>`).join('');
+            
+            renderDynamic('topSections', 'pTop');
+            renderDynamic('botSections', 'pBot');
+            
+            const stip = document.getElementById('stipend').value; const ctc = document.getElementById('ctc').value;
+            document.getElementById('pInc').style.display = (stip || ctc) ? 'block' : 'none';
+            document.getElementById('pIncText').innerText = [stip, ctc].filter(v => v).join('\n');
         }
-    }
 
-    // Initialize
-    updatePreview();
-</script>
+        function addSec(id) {
+            const div = document.createElement('div'); div.className = 'section-input';
+            div.innerHTML = `<input type="text" placeholder="Heading" class="h-in" oninput="sync()" value="Section Heading" style="font-weight:bold; margin-bottom:5px;"><textarea placeholder="Content..." class="t-in" oninput="sync()" rows="3"></textarea><button onclick="this.parentElement.remove();sync()" style="position:absolute; right:5px; top:5px; background:none; border:none; color:red; cursor:pointer;">&times;</button>`;
+            document.getElementById(id).appendChild(div); sync();
+        }
 
+        function renderDynamic(srcId, destId) {
+            const items = document.querySelectorAll(`#${srcId} .section-input`);
+            document.getElementById(destId).innerHTML = Array.from(items).map(i => `<h3 class="jd-section-h">${i.querySelector('.h-in').value}</h3><p style="white-space:pre-wrap; line-height:1.6; color:#444;">${i.querySelector('.t-in').value}</p>`).join('');
+        }
+
+        function readLogo(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => { const img = document.getElementById('pLogo'); img.src = e.target.result; img.style.display = 'block'; };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        sync();
+    </script>
 </body>
 </html>
+
+Feel free to customize the colors and fonts in the code block. Let me know if you'd like any other adjustments!
