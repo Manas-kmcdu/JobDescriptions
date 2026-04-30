@@ -19,13 +19,46 @@
         .jd-section-h { color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
         .inc-box { background: #f8fafc; padding: 20px; border-left: 5px solid var(--primary); margin-top: 30px; }
         #pLogo { max-height: 80px; max-width: 150px; display: none; margin-bottom: 20px; }
+
+        /* Logo upload area */
+        .logo-drop {
+            border: 2px dashed #cbd5e1;
+            border-radius: 6px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .2s;
+            background: #f8fafc;
+            position: relative;
+        }
+        .logo-drop:hover, .logo-drop.drag-over { border-color: var(--primary); background: #eef2ff; }
+        .logo-drop input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+        .logo-drop-text { font-size: 12px; color: #94a3b8; pointer-events: none; }
+        .logo-drop-text b { color: #475569; }
+        .logo-preview-thumb { max-height: 48px; max-width: 120px; border-radius: 4px; margin-bottom: 6px; display: none; }
+        .logo-clear { font-size: 11px; color: #ef4444; cursor: pointer; display: none; background: none; border: none; padding: 0; margin-top: 4px; text-decoration: underline; }
+        .paste-hint { font-size: 11px; color: #94a3b8; margin-top: 6px; text-align: center; }
+        kbd { background: #e2e8f0; border-radius: 3px; padding: 1px 5px; font-size: 11px; font-family: monospace; color: #475569; }
+
         @media print { .sidebar { display: none; } .preview { background: white; padding: 0; } .paper { box-shadow: none; border: none; } }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <h2>JD Builder</h2>
-        <div class="form-group"><label>Logo</label><input type="file" accept="image/*" onchange="readLogo(this)"></div>
+
+        <!-- Logo upload + paste -->
+        <div class="form-group">
+            <label>Logo</label>
+            <div class="logo-drop" id="logoDrop">
+                <input type="file" accept="image/*" onchange="readLogoFile(this)">
+                <img class="logo-preview-thumb" id="thumbImg">
+                <div class="logo-drop-text" id="dropText"><b>Click to upload</b> or drag & drop</div>
+                <button class="logo-clear" id="logoClear" onclick="clearLogo(event)">✕ Remove logo</button>
+            </div>
+            <div class="paste-hint">Or press <kbd>Ctrl</kbd>+<kbd>V</kbd> anywhere to paste a copied image</div>
+        </div>
+
         <div class="form-group"><label>Theme Color</label><input type="color" id="color" value="#002060" oninput="sync()"></div>
         <div class="form-group"><label>Organization</label><input type="text" id="org" placeholder="Acme Corp" oninput="sync()"></div>
         <div class="form-group"><label>Role Title</label><input type="text" id="role" placeholder="Senior Analyst" oninput="sync()"></div>
@@ -59,6 +92,59 @@
     </div>
 
     <script>
+        function setLogoSrc(src) {
+            // preview paper
+            const pLogo = document.getElementById('pLogo');
+            pLogo.src = src; pLogo.style.display = 'block';
+            // sidebar thumb
+            const thumb = document.getElementById('thumbImg');
+            thumb.src = src; thumb.style.display = 'block';
+            document.getElementById('dropText').style.display = 'none';
+            document.getElementById('logoClear').style.display = 'inline';
+        }
+
+        function clearLogo(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('pLogo').style.display = 'none';
+            document.getElementById('pLogo').src = '';
+            document.getElementById('thumbImg').style.display = 'none';
+            document.getElementById('thumbImg').src = '';
+            document.getElementById('dropText').style.display = 'block';
+            document.getElementById('logoClear').style.display = 'none';
+        }
+
+        function readLogoFile(input) {
+            if (input.files && input.files[0]) readBlob(input.files[0]);
+        }
+
+        function readBlob(blob) {
+            const reader = new FileReader();
+            reader.onload = e => setLogoSrc(e.target.result);
+            reader.readAsDataURL(blob);
+        }
+
+        // Paste anywhere on page
+        document.addEventListener('paste', function(e) {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (const item of items) {
+                if (item.type.startsWith('image/')) {
+                    readBlob(item.getAsFile());
+                    e.preventDefault();
+                    return;
+                }
+            }
+        });
+
+        // Drag & drop on logo area
+        const drop = document.getElementById('logoDrop');
+        drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+        drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+        drop.addEventListener('drop', e => {
+            e.preventDefault(); drop.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) readBlob(file);
+        });
+
         function sync() {
             const col = document.getElementById('color').value;
             document.documentElement.style.setProperty('--primary', col);
@@ -88,13 +174,6 @@
             document.getElementById(destId).innerHTML = Array.from(items).map(i => `<h3 class="jd-section-h">${i.querySelector('.h-in').value}</h3><p style="white-space:pre-wrap; line-height:1.6; color:#444;">${i.querySelector('.t-in').value}</p>`).join('');
         }
 
-        function readLogo(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => { const img = document.getElementById('pLogo'); img.src = e.target.result; img.style.display = 'block'; };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
         sync();
     </script>
 </body>
