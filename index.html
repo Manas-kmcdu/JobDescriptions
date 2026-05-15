@@ -1,180 +1,2141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Professional JD Generator Tool</title>
-    <style>
-        :root { --primary: #002060; --gray: #f8fafc; }
-        body { font-family: 'Segoe UI', sans-serif; display: flex; margin: 0; background: #e2e8f0; height: 100vh; overflow: hidden; }
-        .sidebar { width: 450px; background: white; padding: 25px; overflow-y: auto; box-shadow: 5px 0 15px rgba(0,0,0,0.1); z-index: 10; }
-        .preview { flex: 1; padding: 40px; overflow-y: auto; align-items: stretch; display: flex; justify-content: center; position: relative; }
-        .paper { width: 100%; max-width: 800px; background: white; padding: 60px; padding-bottom: 200px; height: auto; min-height: 100vh; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h2 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .btn { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
-        .section-input { background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 10px; position: relative; }
-        .tag { background: #eef2ff; color: var(--primary); padding: 5px 12px; border-radius: 4px; font-size: 13px; font-weight: bold; margin-right: 5px; }
-        .jd-section-h { color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .inc-box { background: #f8fafc; padding: 20px; border-left: 5px solid var(--primary); margin-top: 30px; }
-        #pLogo { max-height: 80px; max-width: 150px; display: none; margin-bottom: 20px; }
+  <!-- ============================================================
+  🔍 SEO CONCEPT #1: THE <head> SECTION
+  Everything here is INVISIBLE to users but CRITICAL to search engines.
+  This is where SEO lives. Get this right first.
+  ============================================================ -->
 
-        /* Logo upload area */
-        .logo-drop {
-            border: 2px dashed #cbd5e1;
-            border-radius: 6px;
-            padding: 14px;
-            text-align: center;
-            cursor: pointer;
-            transition: all .2s;
-            background: #f8fafc;
-            position: relative;
-        }
-        .logo-drop:hover, .logo-drop.drag-over { border-color: var(--primary); background: #eef2ff; }
-        .logo-drop input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-        .logo-drop-text { font-size: 12px; color: #94a3b8; pointer-events: none; }
-        .logo-drop-text b { color: #475569; }
-        .logo-preview-thumb { max-height: 48px; max-width: 120px; border-radius: 4px; margin-bottom: 6px; display: none; }
-        .logo-clear { font-size: 11px; color: #ef4444; cursor: pointer; display: none; background: none; border: none; padding: 0; margin-top: 4px; text-decoration: underline; }
-        .paste-hint { font-size: 11px; color: #94a3b8; margin-top: 6px; text-align: center; }
-        kbd { background: #e2e8f0; border-radius: 3px; padding: 1px 5px; font-size: 11px; font-family: monospace; color: #475569; }
+  <!-- #2: CHARSET — Always UTF-8. Prevents encoding bugs. -->
+  <meta charset="UTF-8">
 
-        @media print { .sidebar { display: none; } .preview { background: white; padding: 0; } .paper { box-shadow: none; border: none; } }
-    </style>
+  <!-- #3: VIEWPORT — Makes site mobile-friendly. Google penalizes non-mobile sites. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- #4: TITLE TAG — Single most important on-page SEO factor.
+       Rules: 50-60 chars | Put primary keyword first | Every page unique -->
+  <title>SEO Masterclass: Learn Search Engine Optimization with Live Examples</title>
+
+  <!-- #5: META DESCRIPTION — Shown in search results. NOT a ranking factor
+       but HUGELY affects click-through rate (CTR).
+       Rules: 150-160 chars | Include keyword | Compelling CTA -->
+  <meta name="description" content="Learn SEO from scratch with live annotated examples. Understand title tags, meta descriptions, headers, structured data, Core Web Vitals, and more — all in one page.">
+
+  <!-- #6: CANONICAL TAG — Tells Google which URL is the "true" version.
+       Prevents duplicate content penalty (e.g., http vs https, www vs non-www) -->
+  <link rel="canonical" href="https://example.com/seo-masterclass">
+
+  <!-- #7: ROBOTS META — Controls crawling behavior per page -->
+  <meta name="robots" content="index, follow">
+  <!-- Other values: noindex, nofollow, noarchive, nosnippet -->
+
+  <!-- #8: OPEN GRAPH — Controls how page looks when shared on social media.
+       Facebook, LinkedIn, WhatsApp all read these. -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SEO Masterclass: Live Examples">
+  <meta property="og:description" content="The most interactive SEO learning experience on the web.">
+  <meta property="og:url" content="https://example.com/seo-masterclass">
+  <meta property="og:image" content="https://example.com/images/seo-masterclass-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="SEO Academy">
+
+  <!-- #9: TWITTER CARD — Controls appearance on Twitter/X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@seoacademy">
+  <meta name="twitter:title" content="SEO Masterclass: Live Examples">
+  <meta name="twitter:description" content="Learn SEO with live annotated examples.">
+  <meta name="twitter:image" content="https://example.com/images/seo-masterclass-twitter.jpg">
+
+  <!-- #10: STRUCTURED DATA / SCHEMA.org (JSON-LD) — The most powerful SEO secret.
+       Tells Google EXACTLY what your content IS. Unlocks rich results. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "SEO Masterclass",
+    "description": "Comprehensive SEO learning with live annotated examples",
+    "provider": {
+      "@type": "Organization",
+      "name": "SEO Academy",
+      "url": "https://example.com"
+    },
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "courseWorkload": "PT2H"
+    }
+  }
+  </script>
+
+  <!-- #11: HREFLANG — For multilingual sites. Tells Google which language version to show which country -->
+  <link rel="alternate" hreflang="en" href="https://example.com/seo-masterclass">
+  <link rel="alternate" hreflang="es" href="https://example.com/es/seo-masterclass">
+
+  <!-- #12: PRECONNECT / DNS-PREFETCH — Page speed optimization. Faster = better ranking. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f5f0e8;
+      --cream: #ede8dc;
+      --accent: #c8401a;
+      --accent2: #1a6bc8;
+      --highlight: #ffd166;
+      --highlight2: #b8f5c0;
+      --highlight3: #ffc8c8;
+      --highlight4: #c8e8ff;
+      --tag-bg: #0d0d0d;
+      --tag-text: #f5f0e8;
+      --annotation: #c8401a;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --display: 'Playfair Display', Georgia, serif;
+      --border: 2px solid #0d0d0d;
+      --shadow: 4px 4px 0px #0d0d0d;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── UTILITY ─────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .mono { font-family: var(--mono); }
+
+    /* ── ANNOTATION SYSTEM ───────────────────────────── */
+    .seo-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: white;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+    .seo-label.blue { background: var(--accent2); }
+    .seo-label.green { background: #1a8c4a; }
+    .seo-label.purple { background: #7c1a8c; }
+    .seo-label.orange { background: #b86a00; }
+
+    .annotation-box {
+      border: var(--border);
+      box-shadow: var(--shadow);
+      background: white;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      position: relative;
+    }
+    .annotation-box::before {
+      content: attr(data-label);
+      position: absolute;
+      top: -14px;
+      left: 12px;
+      background: var(--accent);
+      color: white;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .annotation-box.blue::before { background: var(--accent2); }
+    .annotation-box.green::before { background: #1a8c4a; }
+    .annotation-box.purple::before { background: #7c1a8c; }
+    .annotation-box.warn::before { background: #b86a00; }
+
+    .highlight-yellow { background: var(--highlight); padding: 0 3px; }
+    .highlight-green { background: var(--highlight2); padding: 0 3px; }
+    .highlight-red { background: var(--highlight3); padding: 0 3px; }
+    .highlight-blue { background: var(--highlight4); padding: 0 3px; }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #fff8f5;
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 15px;
+    }
+    .callout.blue { border-color: var(--accent2); background: #f5f8ff; }
+    .callout.green { border-color: #1a8c4a; background: #f5fff8; }
+    .callout.warn { border-color: #b86a00; background: #fffaf0; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    #main-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--ink);
+      color: var(--paper);
+      border-bottom: 3px solid var(--accent);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 0; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--paper);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 6px 12px;
+      transition: background 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.1); color: var(--highlight); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: 'SEO';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: 28vw;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    .hero-title em { color: var(--accent); font-style: normal; }
+    .hero-desc {
+      font-size: 1.15rem;
+      max-width: 600px;
+      color: rgba(245,240,232,0.75);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .hero-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      border-radius: 100px;
+    }
+    .badge.accent { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION HEADERS ─────────────────────────────── */
+    .section-header {
+      border-top: var(--border);
+      padding: 3rem 0 2rem;
+    }
+    .section-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 0.5rem;
+      max-width: 650px;
+    }
+
+    /* ── CONCEPT CARD ─────────────────────────────────── */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .concept-card {
+      border: var(--border);
+      box-shadow: var(--shadow);
+      background: white;
+      padding: 1.5rem;
+      position: relative;
+      transition: transform 0.15s;
+    }
+    .concept-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #0d0d0d; }
+    .concept-card-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+    .concept-card h3 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .concept-card p { font-size: 14px; color: #444; line-height: 1.6; }
+    .concept-card .card-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      background: var(--cream);
+      border: 1px solid #ccc;
+      border-radius: 2px;
+    }
+
+    /* ── CODE BLOCK ───────────────────────────────────── */
+    .code-block {
+      background: #1a1a1a;
+      color: #e8e8e8;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 1.5rem;
+      border-radius: 0;
+      overflow-x: auto;
+      border: var(--border);
+      margin: 1rem 0;
+    }
+    .code-block .comment { color: #6a9955; }
+    .code-block .tag { color: #569cd6; }
+    .code-block .attr { color: #9cdcfe; }
+    .code-block .val { color: #ce9178; }
+    .code-block .key { color: #dcdcaa; }
+
+    /* ── LIVE DEMO WEBSITE ────────────────────────────── */
+    #live-demo {
+      background: var(--cream);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+    .demo-browser-bar {
+      background: #e0e0e0;
+      border-bottom: var(--border);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .browser-dot { width: 12px; height: 12px; border-radius: 50%; background: #ccc; border: 1px solid #aaa; }
+    .browser-dot:nth-child(1) { background: #ff5f57; }
+    .browser-dot:nth-child(2) { background: #febc2e; }
+    .browser-dot:nth-child(3) { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #333;
+      margin-left: 0.5rem;
+    }
+
+    /* ── DEMO WEBSITE STYLES ──────────────────────────── */
+    .demo-site { background: white; }
+    .demo-site-nav {
+      background: #1c3a6e;
+      color: white;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .demo-site-logo { font-weight: 700; font-size: 1.1rem; padding: 1rem 0; }
+    .demo-site-links { display: flex; gap: 1.5rem; font-size: 14px; }
+    .demo-site-links a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 0; display: block; }
+    .demo-hero-section {
+      background: linear-gradient(135deg, #1c3a6e 0%, #2d6ac4 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .demo-h1 { font-family: var(--display); font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2; }
+    .demo-hero-p { font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 1.5rem; }
+    .demo-cta {
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .demo-content { padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .demo-h2 { font-size: 1.6rem; font-weight: 700; margin: 2rem 0 1rem; color: #1c3a6e; }
+    .demo-h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #333; }
+    .demo-p { font-size: 15px; line-height: 1.7; margin-bottom: 1rem; color: #444; }
+    .demo-img-placeholder {
+      background: #e8f0fe;
+      border: 2px dashed #a0b4d6;
+      border-radius: 4px;
+      padding: 2rem;
+      text-align: center;
+      color: #6a7fa0;
+      font-size: 14px;
+      margin: 1rem 0;
+    }
+    .demo-breadcrumb { font-size: 13px; color: #777; padding: 0.75rem 2rem; border-bottom: 1px solid #eee; background: #f9f9f9; }
+    .demo-breadcrumb a { color: #1c3a6e; text-decoration: none; }
+    .demo-footer { background: #f5f5f5; border-top: 1px solid #ddd; padding: 2rem; text-align: center; font-size: 13px; color: #777; }
+
+    /* annotation overlays on demo */
+    .anno {
+      position: relative;
+      outline: 2px dashed transparent;
+      transition: outline 0.2s;
+      cursor: help;
+    }
+    .anno:hover { outline: 2px dashed var(--accent); }
+    .anno-tag {
+      position: absolute;
+      background: var(--accent);
+      color: white;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      top: -1px;
+      right: -1px;
+      z-index: 10;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .anno-tag.blue { background: var(--accent2); }
+    .anno-tag.green { background: #1a8c4a; }
+
+    /* ── SERP DEMO ────────────────────────────────────── */
+    .serp-result {
+      border: var(--border);
+      background: white;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin: 1rem 0;
+      max-width: 600px;
+    }
+    .serp-url { font-family: var(--mono); font-size: 12px; color: #1a8c4a; margin-bottom: 0.3rem; }
+    .serp-breadcrumb { font-family: var(--mono); font-size: 12px; color: #555; margin-bottom: 0.5rem; }
+    .serp-title { color: #1a0dab; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.3rem; cursor: pointer; }
+    .serp-title:hover { text-decoration: underline; }
+    .serp-desc { font-size: 14px; color: #4d5156; line-height: 1.55; }
+    .serp-desc strong { color: #000; }
+    .serp-rich { border-top: 1px solid #eee; margin-top: 1rem; padding-top: 1rem; }
+    .serp-rich-title { font-size: 12px; font-weight: 600; color: #333; margin-bottom: 0.5rem; }
+    .serp-faq-item { border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.8rem; margin-bottom: 0.4rem; font-size: 13px; color: #1a0dab; cursor: pointer; }
+
+    /* ── TABLES ───────────────────────────────────────── */
+    .seo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 14px;
+    }
+    .seo-table th {
+      background: var(--ink);
+      color: white;
+      padding: 0.6rem 1rem;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+    .seo-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: top;
+    }
+    .seo-table tr:nth-child(even) td { background: var(--cream); }
+    .seo-table tr:hover td { background: var(--highlight4); }
+
+    /* ── SCHEMA VISUALIZER ────────────────────────────── */
+    .schema-box {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 1.5rem;
+      border: var(--border);
+      overflow-x: auto;
+      line-height: 1.8;
+    }
+    .schema-key { color: #79c0ff; }
+    .schema-val { color: #a5d6ff; }
+    .schema-str { color: #a8ff78; }
+    .schema-comment { color: #8b949e; font-style: italic; }
+
+    /* ── PROGRESS METER ───────────────────────────────── */
+    .meter-bar { background: #e0e0e0; border: 1px solid #ccc; border-radius: 0; height: 12px; margin: 0.3rem 0; overflow: hidden; }
+    .meter-fill { height: 100%; transition: width 1s ease; }
+    .meter-fill.good { background: #1a8c4a; }
+    .meter-fill.ok { background: #b86a00; }
+    .meter-fill.bad { background: var(--accent); }
+
+    /* ── KEYWORD MAP ──────────────────────────────────── */
+    .keyword-map {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .keyword-pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 1px solid;
+      border-radius: 2px;
+      cursor: default;
+    }
+    .keyword-pill.primary { border-color: var(--accent); background: #fff0ee; color: var(--accent); font-weight: 600; }
+    .keyword-pill.secondary { border-color: var(--accent2); background: #eef4ff; color: var(--accent2); }
+    .keyword-pill.lsi { border-color: #1a8c4a; background: #f0fff4; color: #1a8c4a; }
+    .keyword-pill.long { border-color: #7c1a8c; background: #fdf0ff; color: #7c1a8c; }
+
+    /* ── CHECKLIST ────────────────────────────────────── */
+    .checklist { list-style: none; margin: 1rem 0; }
+    .checklist li {
+      padding: 0.4rem 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      border-bottom: 1px dotted #ddd;
+    }
+    .checklist li:last-child { border: none; }
+    .check-icon { flex-shrink: 0; font-size: 16px; }
+
+    /* ── LINK ─────────────────────────────────────────── */
+    .link-demo { display: inline-flex; align-items: center; gap: 4px; }
+    .link-demo a { color: var(--accent2); }
+    .link-demo .link-juice {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: var(--highlight4);
+      padding: 2px 5px;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+    }
+
+    /* ── SECTIONS ─────────────────────────────────────── */
+    .main-section { padding: 4rem 0; border-top: var(--border); }
+    .main-section:first-child { border-top: none; }
+
+    /* ── TOC ──────────────────────────────────────────── */
+    #toc {
+      background: white;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    #toc h3 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; color: #666; }
+    #toc ol { padding-left: 1.2rem; }
+    #toc li { margin-bottom: 0.4rem; font-size: 15px; }
+    #toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted #aaa; }
+    #toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    #site-footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-title { font-family: var(--display); font-size: 1.5rem; margin-bottom: 1rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2rem; }
+    .footer-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { font-size: 14px; margin-bottom: 0.4rem; color: rgba(245,240,232,0.65); }
+
+    /* ── SPEED METRICS ────────────────────────────────── */
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .metric-card {
+      border: var(--border);
+      background: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .metric-score { font-family: var(--mono); font-size: 2.5rem; font-weight: 600; line-height: 1; }
+    .metric-score.green { color: #1a8c4a; }
+    .metric-score.orange { color: #b86a00; }
+    .metric-score.red { color: var(--accent); }
+    .metric-label { font-size: 11px; font-family: var(--mono); color: #666; margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .metric-desc { font-size: 12px; color: #888; margin-top: 0.3rem; }
+
+    /* ── BACK TO TOP ──────────────────────────────────── */
+    .back-to-top {
+      display: inline-block;
+      margin-top: 2rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+    }
+    .back-to-top:hover { background: var(--accent); color: white; }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 700px) {
+      .demo-site-links { display: none; }
+      .concept-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── TOGGLE ANNOTATION ────────────────────────────── */
+    .toggle-btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 14px;
+      border: var(--border);
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .toggle-btn:hover, .toggle-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .toggle-btn.blue:hover, .toggle-btn.blue.active { background: var(--accent2); border-color: var(--accent2); }
+
+    .anno-overlay {
+      position: absolute;
+      background: rgba(200,64,26,0.08);
+      inset: 0;
+      border: 2px dashed var(--accent);
+      pointer-events: none;
+      display: none;
+    }
+    .annotations-on .anno-overlay { display: block; }
+    .annotations-on .anno-tag { display: block !important; }
+    .anno-tag { display: none; }
+
+    /* fade in */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
+    .fade-in { animation: fadeUp 0.5s ease forwards; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media(max-width:700px) { .two-col { grid-template-columns:1fr; } }
+
+    .bad-example { background: #fff0ee; border: 1px solid var(--highlight3); padding: 0.8rem 1rem; margin: 0.5rem 0; }
+    .good-example { background: #f0fff4; border: 1px solid var(--highlight2); padding: 0.8rem 1rem; margin: 0.5rem 0; }
+    .ex-label { font-family: var(--mono); font-size: 10px; font-weight: 600; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .bad-example .ex-label { color: var(--accent); }
+    .good-example .ex-label { color: #1a8c4a; }
+
+    .ranking-factor {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px dotted #ddd;
+    }
+    .rf-name { flex: 1; font-size: 14px; }
+    .rf-impact { font-family: var(--mono); font-size: 11px; padding: 2px 8px; background: var(--cream); }
+    .rf-impact.high { background: #ffd166; }
+    .rf-impact.critical { background: var(--highlight3); color: var(--accent); font-weight:600; }
+  </style>
 </head>
-<body>
-    <div class="sidebar">
-        <h2>JD Builder</h2>
 
-        <!-- Logo upload + paste -->
-        <div class="form-group">
-            <label>Logo</label>
-            <div class="logo-drop" id="logoDrop">
-                <input type="file" accept="image/*" onchange="readLogoFile(this)">
-                <img class="logo-preview-thumb" id="thumbImg">
-                <div class="logo-drop-text" id="dropText"><b>Click to upload</b> or drag & drop</div>
-                <button class="logo-clear" id="logoClear" onclick="clearLogo(event)">✕ Remove logo</button>
+<!-- #13: THE <body> TAG — HTML document structure matters for SEO
+     Semantic HTML = Google understands your content better -->
+<body id="top">
+
+<!-- ANNOTATION: sticky nav bar itself demonstrates SEO-relevant navigation structure -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+  <!-- #14: aria-label = accessibility = better SEO (Google uses accessibility signals) -->
+  <div class="nav-inner">
+    <span class="nav-logo">⟨SEO/MASTERCLASS⟩</span>
+    <div class="nav-links">
+      <a href="#on-page">On-Page</a>
+      <a href="#technical">Technical</a>
+      <a href="#keywords">Keywords</a>
+      <a href="#links">Links</a>
+      <a href="#content">Content</a>
+      <a href="#schema">Schema</a>
+      <a href="#local">Local</a>
+      <a href="#speed">Speed</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════ -->
+<header id="hero" role="banner">
+  <!-- #15: <header role="banner"> is semantic HTML. Tells Google "this is the site header" -->
+  <div class="hero-inner">
+    <p class="hero-eyebrow">▸ Interactive SEO Masterclass</p>
+    <h1 class="hero-title">
+      Learn <em>SEO</em> by reading<br>an SEO-optimized page
+    </h1>
+    <p class="hero-desc">
+      Every element of this page is annotated. The website <em>is</em> the lesson.
+      Hover over highlighted areas in the demo site to see what Google sees.
+    </p>
+    <div class="hero-badges">
+      <span class="badge accent">▸ On-Page SEO</span>
+      <span class="badge">Technical SEO</span>
+      <span class="badge">Keyword Research</span>
+      <span class="badge">Link Building</span>
+      <span class="badge">Schema Markup</span>
+      <span class="badge">Core Web Vitals</span>
+      <span class="badge">Local SEO</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════════════ -->
+<main id="main-content" role="main">
+<!-- #16: <main role="main"> tells Google "primary content starts here" -->
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div id="toc">
+    <h3>📋 What you'll learn</h3>
+    <ol>
+      <li><a href="#on-page">On-Page SEO — Title, Description, Headers, Content</a></li>
+      <li><a href="#live-website">The Live Annotated Example Website</a></li>
+      <li><a href="#technical">Technical SEO — Crawling, Indexing, Sitemaps, robots.txt</a></li>
+      <li><a href="#keywords">Keyword Research — Intent, Volume, Competition</a></li>
+      <li><a href="#links">Link Building — PageRank, Anchor Text, Internal Links</a></li>
+      <li><a href="#content">Content Strategy — E-E-A-T, Topical Authority, Freshness</a></li>
+      <li><a href="#schema">Schema Markup — Rich Results, JSON-LD</a></li>
+      <li><a href="#local">Local SEO — Google Business Profile, NAP, Citations</a></li>
+      <li><a href="#speed">Core Web Vitals — LCP, FID/INP, CLS</a></li>
+      <li><a href="#serp">SERP Features — Featured Snippets, PAA, Rich Results</a></li>
+    </ol>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 1: ON-PAGE SEO
+  ══════════════════════════════════════════════════ -->
+  <section id="on-page" class="main-section">
+    <div class="section-header">
+      <div class="section-number">01 / 10 — ON-PAGE SEO</div>
+      <h2 class="section-title">The elements Google reads<br>on every single page</h2>
+      <p class="section-subtitle">On-page SEO = what you control directly. Title, headings, content, images, URLs. This is where most people start — and where most people make mistakes.</p>
+    </div>
+
+    <!-- TITLE TAG DEEP DIVE -->
+    <div class="annotation-box" data-label="🔍 SEO CONCEPT: TITLE TAG">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">The Title Tag — Most Important On-Page Factor</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">The <code style="background:#eee; padding:1px 5px;">&lt;title&gt;</code> tag appears in three places: browser tab, Google search results, and social shares. It's the biggest signal Google uses to understand page topic.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="bad-example">
+            <div class="ex-label">❌ Bad Title</div>
+            <code style="font-size:13px;">Home | My Website</code>
+            <p style="font-size:12px; margin-top:0.4rem; color:#666;">No keyword. Not descriptive. Wastes the most valuable SEO real estate.</p>
+          </div>
+          <div class="bad-example">
+            <div class="ex-label">❌ Too Long (80 chars)</div>
+            <code style="font-size:13px;">The Best Comprehensive Guide to Understanding Search Engine Optimization for Beginners in 2024</code>
+            <p style="font-size:12px; margin-top:0.4rem; color:#666;">Gets truncated in SERPs. Google rewrites it. Power lost.</p>
+          </div>
+        </div>
+        <div>
+          <div class="good-example">
+            <div class="ex-label">✅ Great Title (~58 chars)</div>
+            <code style="font-size:13px;">SEO Guide for Beginners: Rank #1 on Google (2024)</code>
+            <p style="font-size:12px; margin-top:0.4rem; color:#666;">Primary keyword first. Benefit clear. Year signals freshness. Under 60 chars.</p>
+          </div>
+          <div class="good-example">
+            <div class="ex-label">✅ Product Page Title</div>
+            <code style="font-size:13px;">iPhone 15 Pro Case – Slim & Drop-Proof | CaseCo</code>
+            <p style="font-size:12px; margin-top:0.4rem; color:#666;">Keyword + USP + brand. Dash separates brand. Conversational.</p>
+          </div>
+        </div>
+      </div>
+
+      <table class="seo-table" style="margin-top:1rem;">
+        <tr><th>Rule</th><th>Why It Matters</th></tr>
+        <tr><td>50–60 characters max</td><td>Google truncates longer titles in SERPs with "..."</td></tr>
+        <tr><td>Primary keyword first</td><td>Earlier = more weight. "SEO Guide" ranks better than "Guide to SEO"</td></tr>
+        <tr><td>Every page unique</td><td>Duplicate titles = Google can't differentiate pages</td></tr>
+        <tr><td>Match search intent</td><td>"how to" title for tutorial, not "buy" title</td></tr>
+        <tr><td>Include brand for homepage</td><td>Brand recognition at end: "Topic | Brand Name"</td></tr>
+      </table>
+    </div>
+
+    <!-- META DESCRIPTION -->
+    <div class="annotation-box blue" data-label="🔍 SEO CONCEPT: META DESCRIPTION">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Meta Description — Not a Ranking Factor, But Critical for CTR</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Google says meta descriptions don't directly affect rankings. But a great description = more clicks = more traffic. Google often rewrites them anyway, so write them to persuade humans.</p>
+
+      <div class="serp-result">
+        <div class="serp-url">https://example.com ›</div>
+        <div class="serp-title">SEO Guide for Beginners: Rank #1 on Google (2024)</div>
+        <div class="serp-desc">
+          <span class="highlight-yellow">Learn SEO</span> step-by-step with our free beginner's guide. Covers keyword research, on-page optimization, link building, and <span class="highlight-yellow">Core Web Vitals</span>. <strong>Start ranking today.</strong>
+        </div>
+      </div>
+
+      <p style="font-size:13px; margin-top:1rem; color:#555;">↑ This is how a meta description looks in Google. Notice: keywords appear <span class="highlight-yellow">highlighted in bold</span> when they match the search query. Google bolds matching words to help users scan.</p>
+
+      <div class="callout" style="margin-top:1rem;">
+        <strong>Formula:</strong> [What page contains] + [Who it's for] + [Key benefit] + [Call to action] = under 160 chars
+      </div>
+    </div>
+
+    <!-- HEADER TAGS -->
+    <div class="annotation-box green" data-label="🔍 SEO CONCEPT: HEADER HIERARCHY">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">H1–H6: The Heading Hierarchy</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Headers create content structure. Google uses them to understand what a page is about and which sections are most important. Think of them like a newspaper: H1 = headline, H2 = section headers, H3 = subsections.</p>
+
+      <div style="border:var(--border); padding:1.2rem; background:var(--cream);">
+        <div style="font-size:2rem; font-weight:700; border-left:4px solid var(--accent); padding-left:0.8rem; margin-bottom:0.8rem;">
+          H1: How to Train a Dog (1 per page. Primary keyword.)
+        </div>
+        <div style="font-size:1.4rem; font-weight:600; border-left:4px solid var(--accent2); padding-left:0.8rem; margin-bottom:0.5rem;">
+          H2: Basic Dog Training Commands (Main topics)
+        </div>
+        <div style="font-size:1.1rem; font-weight:600; border-left:4px solid #1a8c4a; padding-left:0.8rem; margin-bottom:0.3rem;">
+          H3: Teaching "Sit" (Subtopics under H2)
+        </div>
+        <div style="font-size:0.95rem; font-weight:600; border-left:4px solid #7c1a8c; padding-left:0.8rem; margin-bottom:0.3rem;">
+          H4: Step-by-step instructions (Deeper details)
+        </div>
+        <div style="font-size:1.4rem; font-weight:600; border-left:4px solid var(--accent2); padding-left:0.8rem; margin-bottom:0.5rem; margin-top:0.5rem;">
+          H2: Dog Training Mistakes to Avoid
+        </div>
+        <div style="font-size:1.1rem; font-weight:600; border-left:4px solid #1a8c4a; padding-left:0.8rem;">
+          H3: Punishing Instead of Rewarding
+        </div>
+      </div>
+
+      <table class="seo-table" style="margin-top:1rem;">
+        <tr><th>Rule</th><th>Correct</th><th>Wrong</th></tr>
+        <tr><td>H1 count</td><td>Exactly 1 per page</td><td>0 or 2+ H1s</td></tr>
+        <tr><td>H1 content</td><td>Contains primary keyword</td><td>"Welcome to our site"</td></tr>
+        <tr><td>H2 usage</td><td>Main subtopics, include related keywords</td><td>Skipping to H3 from H1</td></tr>
+        <tr><td>Style use</td><td>Use CSS for visual styling</td><td>Using H tags just to make text big</td></tr>
+      </table>
+    </div>
+
+    <!-- URL STRUCTURE -->
+    <div class="annotation-box warn" data-label="🔍 SEO CONCEPT: URL STRUCTURE">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">URL Structure — Clean, Descriptive, Keyword-Rich</h3>
+
+      <div class="two-col">
+        <div>
+          <div class="bad-example">
+            <div class="ex-label">❌ Bad URLs</div>
+            <code style="font-size:12px;">example.com/?p=4921<br>example.com/page1.html<br>example.com/SEO-GUIDE-2024-best-tips-beginner</code>
+          </div>
+        </div>
+        <div>
+          <div class="good-example">
+            <div class="ex-label">✅ Good URLs</div>
+            <code style="font-size:12px;">example.com/seo-guide<br>example.com/blog/dog-training-tips<br>example.com/tools/keyword-research</code>
+          </div>
+        </div>
+      </div>
+
+      <ul class="checklist" style="margin-top:0.8rem;">
+        <li><span class="check-icon">✅</span> Lowercase letters only — uppercase can cause duplicate URL issues</li>
+        <li><span class="check-icon">✅</span> Hyphens (-) not underscores (_) — Google treats underscores as word joiners</li>
+        <li><span class="check-icon">✅</span> Include target keyword — "seo-guide" not "article-5"</li>
+        <li><span class="check-icon">✅</span> Short as possible — remove stop words (and, the, a, of)</li>
+        <li><span class="check-icon">✅</span> Use subfolders for structure — /blog/topic not /blog-topic</li>
+        <li><span class="check-icon">❌</span> Never change URLs on existing pages — destroys link equity</li>
+      </ul>
+    </div>
+
+    <!-- IMAGE SEO -->
+    <div class="annotation-box" data-label="🔍 SEO CONCEPT: IMAGE OPTIMIZATION">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Image SEO — Google Can't See Images (Yet)</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Google reads text around images and the alt attribute to understand what an image contains. Images also appear in Google Image Search — a traffic source most sites ignore.</p>
+
+      <div class="code-block">
+<span class="comment">&lt;!-- ❌ Bad image --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"IMG_00432.jpg"</span> <span class="tag">/&gt;</span>
+
+<span class="comment">&lt;!-- ✅ Good image --&gt;</span>
+<span class="tag">&lt;img</span>
+  <span class="attr">src</span>=<span class="val">"golden-retriever-training-sit-command.webp"</span>
+  <span class="attr">alt</span>=<span class="val">"Golden retriever sitting on command during training session"</span>
+  <span class="attr">width</span>=<span class="val">"800"</span>
+  <span class="attr">height</span>=<span class="val">"600"</span>
+  <span class="attr">loading</span>=<span class="val">"lazy"</span>
+<span class="tag">/&gt;</span>
+      </div>
+
+      <div class="concept-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); margin-top:0;">
+        <div class="concept-card">
+          <div class="concept-card-num">01</div>
+          <h3>File Name</h3>
+          <p>Descriptive, hyphenated. "dog-training.jpg" not "image1.jpg"</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">02</div>
+          <h3>Alt Text</h3>
+          <p>Describe the image in plain English. Include keyword naturally. Don't keyword stuff.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">03</div>
+          <h3>File Format</h3>
+          <p>Use WebP (best). AVIF (better). JPEG for photos. PNG for graphics. Never BMP/TIFF.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">04</div>
+          <h3>File Size</h3>
+          <p>Compress before upload. Target under 150KB. Use Squoosh or Sharp.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">05</div>
+          <h3>Dimensions</h3>
+          <p>Specify width/height to prevent layout shift (CLS). Never skip these.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">06</div>
+          <h3>Lazy Loading</h3>
+          <p>Add loading="lazy" to off-screen images. Speeds up initial load.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 2: LIVE DEMO WEBSITE
+  ══════════════════════════════════════════════════ -->
+  <section id="live-website" class="main-section">
+    <div class="section-header">
+      <div class="section-number">LIVE DEMO</div>
+      <h2 class="section-title">The Annotated Example Website</h2>
+      <p class="section-subtitle">This is a simulated website. Toggle annotations to see every SEO element labeled and explained. Hover over elements to see their SEO role.</p>
+    </div>
+
+    <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+      <button class="toggle-btn active" onclick="toggleAnnotations(this)">🔍 Show SEO Annotations</button>
+      <span style="font-family:var(--mono); font-size:12px; padding:6px 0; color:#666;">← Click to toggle labels on the demo site below</span>
+    </div>
+
+    <div id="live-demo" class="annotations-on">
+      <!-- Browser chrome -->
+      <div class="demo-browser-bar">
+        <div class="browser-dot"></div>
+        <div class="browser-dot"></div>
+        <div class="browser-dot"></div>
+        <div class="browser-url">https://bestdogtraining.com/guide/how-to-train-a-puppy</div>
+      </div>
+
+      <div class="demo-site">
+        <!-- DEMO NAV -->
+        <div style="position:relative;" class="anno">
+          <div class="anno-overlay"></div>
+          <div class="anno-tag blue">SEMANTIC NAV — &lt;nav&gt; tag + aria-label</div>
+          <nav class="demo-site-nav">
+            <div class="demo-site-logo">🐾 DogTraining Pro</div>
+            <div class="demo-site-links">
+              <a href="#">Guides</a>
+              <a href="#">Training Tips</a>
+              <a href="#">Breeds</a>
+              <a href="#">Contact</a>
             </div>
-            <div class="paste-hint">Or press <kbd>Ctrl</kbd>+<kbd>V</kbd> anywhere to paste a copied image</div>
+          </nav>
         </div>
 
-        <div class="form-group"><label>Theme Color</label><input type="color" id="color" value="#002060" oninput="sync()"></div>
-        <div class="form-group"><label>Organization</label><input type="text" id="org" placeholder="Acme Corp" oninput="sync()"></div>
-        <div class="form-group"><label>Role Title</label><input type="text" id="role" placeholder="Senior Analyst" oninput="sync()"></div>
-        <div class="form-group"><label>Role Type</label><select id="type" onchange="sync()"><option>Full Time</option><option>Internship</option><option>Apprenticeship</option><option>Fellowship</option><option>Articleship</option><option>Volunteering</option></select></div>
-        <div class="form-group"><label>Nature</label><select id="nature" onchange="sync()"><option>In-Office</option><option>Hybrid</option><option>Work from Home</option></select></div>
-        <div class="form-group"><label>Location</label><input type="text" id="loc" placeholder="New York, NY" oninput="sync()"></div>
-        
-        <hr><label>Pre-Incentive Sections</label>
-        <div id="topSections"></div>
-        <button class="btn" style="background:#64748b; font-size:12px;" onclick="addSec('topSections')">+ Add Section</button>
-        
-        <hr><div class="form-group"><label>Incentives</label><input type="text" id="stipend" placeholder="Stipend: ₹50,000/mo" oninput="sync()"><input type="text" id="ctc" placeholder="CTC: 12 LPA" style="margin-top:5px" oninput="sync()"></div>
-        
-        <hr><label>Post-Incentive Sections</label>
-        <div id="botSections"></div>
-        <button class="btn" style="background:#64748b; font-size:12px;" onclick="addSec('botSections')">+ Add Section</button>
-        
-        <button class="btn" style="margin-top:30px; background:#10b981;" onclick="window.print()">Export to PDF</button>
-    </div>
-
-    <div class="preview">
-        <div class="paper">
-            <img id="pLogo">
-            <div id="pOrg" style="font-size: 20px; color: #666; font-weight: 500;">ORGANIZATION</div>
-            <h1 id="pTitle" style="font-size: 48px; margin: 5px 0;">Role Title</h1>
-            <div id="pMeta" style="margin-top:15px;"></div>
-            <div id="pTop"></div>
-            <div id="pInc" class="inc-box" style="display:none"><strong>Incentives & Compensation</strong><p id="pIncText" style="white-space:pre-wrap;"></p></div>
-            <div id="pBot"></div>
+        <!-- BREADCRUMB -->
+        <div style="position:relative;" class="anno">
+          <div class="anno-overlay"></div>
+          <div class="anno-tag green">BREADCRUMB — Schema markup + visual UX + SERP display</div>
+          <div class="demo-breadcrumb">
+            <a href="#">Home</a> › <a href="#">Guides</a> › <a href="#">Puppy Training</a> › How to Train a Puppy
+          </div>
         </div>
+
+        <!-- DEMO HERO (H1 area) -->
+        <div style="position:relative;" class="anno">
+          <div class="anno-overlay"></div>
+          <div class="anno-tag">H1 TAG — Primary keyword. One per page. Most important heading.</div>
+          <div class="demo-hero-section">
+            <h1 class="demo-h1">How to Train a Puppy:<br>A Complete Step-by-Step Guide</h1>
+            <p class="demo-hero-p">Everything you need to know to train your puppy, from basic commands to advanced behaviors. Written by certified trainers.</p>
+            <span class="demo-cta">Start Training Today →</span>
+          </div>
+        </div>
+
+        <div class="demo-content">
+          <!-- AUTHOR / PUBLISH DATE -->
+          <div style="position:relative; margin-bottom:1.5rem;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag blue">E-E-A-T SIGNALS — Author name, credentials, date. Expertise + Authority signals.</div>
+            <div style="font-size:13px; color:#666; border-bottom:1px solid #eee; padding-bottom:0.8rem; display:flex; flex-wrap:wrap; gap:1rem;">
+              <span>✍️ By <strong>Dr. Sarah Mitchell</strong>, CPDT-KA</span>
+              <span>📅 Updated March 15, 2024</span>
+              <span>⏱️ 12 min read</span>
+              <span>👁️ 47,293 readers</span>
+            </div>
+          </div>
+
+          <!-- INTRO PARAGRAPH -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag">INTRO PARAGRAPH — Primary keyword in first 100 words. Sets page topic.</div>
+            <p class="demo-p"><strong>Training a puppy</strong> is one of the most rewarding experiences as a dog owner. Whether you have an 8-week-old Labrador or a 6-month-old rescue, this <strong>puppy training guide</strong> covers everything from basic commands to house training. You'll learn positive reinforcement techniques used by professional dog trainers.</p>
+          </div>
+
+          <!-- FEATURED IMAGE -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag blue">IMAGE — Alt text "puppy learning sit command". WebP format. Lazy loaded.</div>
+            <div class="demo-img-placeholder">
+              🐶 [Featured Image: golden-retriever-puppy-training-sit.webp]<br>
+              <small>alt="Golden retriever puppy learning sit command with owner"</small>
+            </div>
+          </div>
+
+          <!-- TABLE OF CONTENTS (in-page) -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag green">IN-PAGE TOC — Jump links. Creates anchor links Google can display as sitelinks.</div>
+            <div style="background:#f9f9f9; border:1px solid #ddd; padding:1rem; margin:1rem 0; border-radius:4px;">
+              <strong style="font-size:14px;">In this guide:</strong>
+              <ol style="font-size:13px; padding-left:1.5rem; margin-top:0.5rem; line-height:2;">
+                <li><a href="#" style="color:#1c3a6e;">When to start puppy training</a></li>
+                <li><a href="#" style="color:#1c3a6e;">Basic commands every dog should know</a></li>
+                <li><a href="#" style="color:#1c3a6e;">House training your puppy</a></li>
+                <li><a href="#" style="color:#1c3a6e;">Common puppy training mistakes</a></li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- H2 SECTION -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag">H2 — Secondary keyword. Section divides. Used in Google's featured snippets.</div>
+            <h2 class="demo-h2" id="when-to-start">When to Start Puppy Training</h2>
+          </div>
+
+          <p class="demo-p">Puppies can begin learning basic commands as early as <strong>7–8 weeks old</strong>. Their brains are like sponges at this age. Short, 5-minute sessions multiple times per day work best for young puppies.</p>
+
+          <!-- H3 SECTION -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag blue">H3 — Subsection under H2. Contains LSI keyword (related term).</div>
+            <h3 class="demo-h3">The Right Age to Begin Training</h3>
+          </div>
+
+          <p class="demo-p">Most experts, including the American Veterinary Society of Animal Behavior, recommend starting positive reinforcement training immediately after bringing your puppy home.</p>
+
+          <!-- INTERNAL LINKS -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag green">INTERNAL LINKS — Pass link equity. Anchor text contains keywords. Helps crawling.</div>
+            <p class="demo-p">Before training begins, make sure you understand <a href="#" style="color:#1c3a6e; font-weight:600;">puppy socialization windows</a> and how they affect learning. You may also want to read our guide on <a href="#" style="color:#1c3a6e; font-weight:600;">choosing the right dog treats for training</a>.</p>
+          </div>
+
+          <!-- STATS / EXTERNAL CITE -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag">EXTERNAL LINK — Linking to authority sources builds E-E-A-T. Opens in new tab.</div>
+            <p class="demo-p">According to a <a href="#" target="_blank" rel="noopener" style="color:#1c3a6e;">2023 study in the Journal of Veterinary Behavior</a>, puppies trained with positive reinforcement showed 73% faster command acquisition than those trained with aversive methods.</p>
+          </div>
+
+          <!-- SCHEMA ELIGIBLE CONTENT -->
+          <div style="position:relative;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag purple" style="background:#7c1a8c;">FAQ CONTENT — Eligible for FAQ Schema → Google shows Q&As directly in SERPs</div>
+            <div style="border:1px solid #e0e0e0; border-radius:4px; overflow:hidden; margin:1rem 0;">
+              <div style="background:#f5f5f5; padding:0.6rem 1rem; font-weight:600; font-size:14px; border-bottom:1px solid #e0e0e0;">Frequently Asked Questions</div>
+              <div style="padding:0.8rem 1rem; font-size:14px; border-bottom:1px solid #f0f0f0;">
+                <strong>Q: How long does puppy training take?</strong>
+                <p style="color:#444; margin-top:0.3rem; line-height:1.6;">Basic commands typically take 1–3 weeks of consistent daily practice. Full obedience training may take 3–6 months depending on the breed and consistency.</p>
+              </div>
+              <div style="padding:0.8rem 1rem; font-size:14px;">
+                <strong>Q: Can you train an older dog?</strong>
+                <p style="color:#444; margin-top:0.3rem; line-height:1.6;">Yes. The saying "you can't teach an old dog new tricks" is a myth. Adult dogs can learn commands — it may just take more patience and shorter sessions.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUTHOR BIO -->
+          <div style="position:relative; margin-top:1.5rem;" class="anno">
+            <div class="anno-overlay"></div>
+            <div class="anno-tag blue">AUTHOR BIO — Trust signal. Links to author page. Builds Authoritativeness (E-E-A-T).</div>
+            <div style="border:1px solid #ddd; border-radius:4px; padding:1rem; display:flex; gap:1rem; align-items:center; background:#fafafa;">
+              <div style="width:50px; height:50px; border-radius:50%; background:#c8d8f5; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">👩‍⚕️</div>
+              <div>
+                <strong style="font-size:14px;">Dr. Sarah Mitchell, CPDT-KA</strong>
+                <p style="font-size:12px; color:#666;">Certified Professional Dog Trainer with 15 years experience. Member of the Association of Professional Dog Trainers. Author of "Positive Pup" (2021).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEMO FOOTER -->
+        <div style="position:relative;" class="anno">
+          <div class="anno-overlay"></div>
+          <div class="anno-tag green">FOOTER — NAP info, internal links, sitemap link. Important for local SEO & crawl.</div>
+          <div class="demo-footer">
+            <strong>DogTraining Pro</strong> | 123 Main St, Austin TX 78701 | (555) 123-4567<br>
+            <a href="#" style="color:#666;">Privacy Policy</a> · <a href="#" style="color:#666;">Sitemap</a> · <a href="#" style="color:#666;">Contact</a>
+          </div>
+        </div>
+      </div><!-- /demo-site -->
+    </div><!-- /live-demo -->
+
+    <div class="callout green" style="margin-top:1rem;">
+      <strong>What you just saw:</strong> Every element of that demo website is an SEO decision. The nav uses semantic HTML. The H1 has the primary keyword. The breadcrumb has schema markup. Author bio signals E-E-A-T. FAQ section targets SERP features. Footer has NAP for local SEO. Nothing on a well-optimized page is accidental.
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 3: TECHNICAL SEO
+  ══════════════════════════════════════════════════ -->
+  <section id="technical" class="main-section">
+    <div class="section-header">
+      <div class="section-number">02 / 10 — TECHNICAL SEO</div>
+      <h2 class="section-title">What Google sees before<br>it reads a single word</h2>
+      <p class="section-subtitle">Technical SEO ensures Google can find, crawl, understand, and index your site. Without this foundation, even great content won't rank.</p>
     </div>
 
-    <script>
-        function setLogoSrc(src) {
-            // preview paper
-            const pLogo = document.getElementById('pLogo');
-            pLogo.src = src; pLogo.style.display = 'block';
-            // sidebar thumb
-            const thumb = document.getElementById('thumbImg');
-            thumb.src = src; thumb.style.display = 'block';
-            document.getElementById('dropText').style.display = 'none';
-            document.getElementById('logoClear').style.display = 'inline';
-        }
+    <!-- CRAWL FLOW -->
+    <div class="annotation-box" data-label="🤖 HOW GOOGLE CRAWLS YOUR SITE">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">The Crawl → Index → Rank Pipeline</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0; border:var(--border);">
+        <div style="padding:1.2rem; background:white; border-right:var(--border);">
+          <div style="font-family:var(--mono); font-size:11px; color:var(--accent); margin-bottom:0.3rem;">STEP 1</div>
+          <strong>Crawling</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">Googlebot follows links across the web, downloading page HTML. If it can't access a page (blocked, broken, too slow), it can't rank it.</p>
+        </div>
+        <div style="padding:1.2rem; background:var(--cream); border-right:var(--border);">
+          <div style="font-family:var(--mono); font-size:11px; color:var(--accent2); margin-bottom:0.3rem;">STEP 2</div>
+          <strong>Processing</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">Google renders the page (executes JavaScript), extracts content, identifies links. It now understands what the page says.</p>
+        </div>
+        <div style="padding:1.2rem; background:white; border-right:var(--border);">
+          <div style="font-family:var(--mono); font-size:11px; color:#1a8c4a; margin-bottom:0.3rem;">STEP 3</div>
+          <strong>Indexing</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">Processed pages enter Google's index — a database of 100+ billion webpages. Only indexed pages can rank. Check via "site:yourdomain.com".</p>
+        </div>
+        <div style="padding:1.2rem; background:var(--cream);">
+          <div style="font-family:var(--mono); font-size:11px; color:#7c1a8c; margin-bottom:0.3rem;">STEP 4</div>
+          <strong>Ranking</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">For each query, Google ranks indexed pages by 200+ factors. Your technical setup, content, and links determine position.</p>
+        </div>
+      </div>
+    </div>
 
-        function clearLogo(e) {
-            if (e) e.stopPropagation();
-            document.getElementById('pLogo').style.display = 'none';
-            document.getElementById('pLogo').src = '';
-            document.getElementById('thumbImg').style.display = 'none';
-            document.getElementById('thumbImg').src = '';
-            document.getElementById('dropText').style.display = 'block';
-            document.getElementById('logoClear').style.display = 'none';
-        }
+    <!-- ROBOTS.TXT -->
+    <div class="annotation-box blue" data-label="⚙️ ROBOTS.TXT">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">robots.txt — The Bouncer for Googlebot</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Located at yourdomain.com/robots.txt. Tells crawlers which pages NOT to crawl. Common mistake: accidentally blocking your own site.</p>
+      <div class="code-block">
+<span class="comment"># Allow everything (default for most sites)</span>
+<span class="key">User-agent:</span> *
+<span class="key">Allow:</span> /
 
-        function readLogoFile(input) {
-            if (input.files && input.files[0]) readBlob(input.files[0]);
-        }
+<span class="comment"># Block crawling of admin, thank-you pages</span>
+<span class="key">User-agent:</span> *
+<span class="key">Disallow:</span> /wp-admin/
+<span class="key">Disallow:</span> /thank-you/
+<span class="key">Disallow:</span> /cart/
 
-        function readBlob(blob) {
-            const reader = new FileReader();
-            reader.onload = e => setLogoSrc(e.target.result);
-            reader.readAsDataURL(blob);
-        }
+<span class="comment"># Point to sitemap</span>
+<span class="key">Sitemap:</span> https://example.com/sitemap.xml
+      </div>
+      <div class="callout warn">
+        <strong>⚠️ Critical Mistake:</strong> Robots.txt blocks CRAWLING, not INDEXING. If other sites link to a blocked page, Google may still index it without seeing the content. Use <code>noindex</code> meta tag to prevent indexing.
+      </div>
+    </div>
 
-        // Paste anywhere on page
-        document.addEventListener('paste', function(e) {
-            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-            for (const item of items) {
-                if (item.type.startsWith('image/')) {
-                    readBlob(item.getAsFile());
-                    e.preventDefault();
-                    return;
-                }
-            }
+    <!-- SITEMAP -->
+    <div class="annotation-box green" data-label="🗺️ XML SITEMAP">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">XML Sitemap — Your Site's Table of Contents for Google</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Lists all important URLs on your site with metadata. Submit to Google Search Console. Especially vital for large sites or new sites with few inbound links.</p>
+      <div class="code-block">
+<span class="tag">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="tag">&lt;urlset</span> <span class="attr">xmlns</span>=<span class="val">"http://www.sitemaps.org/schemas/sitemap/0.9"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;url&gt;</span>
+    <span class="tag">&lt;loc&gt;</span>https://example.com/<span class="tag">&lt;/loc&gt;</span>
+    <span class="tag">&lt;lastmod&gt;</span>2024-03-15<span class="tag">&lt;/lastmod&gt;</span>
+    <span class="tag">&lt;changefreq&gt;</span>weekly<span class="tag">&lt;/changefreq&gt;</span>
+    <span class="tag">&lt;priority&gt;</span>1.0<span class="tag">&lt;/priority&gt;</span>
+  <span class="tag">&lt;/url&gt;</span>
+
+  <span class="tag">&lt;url&gt;</span>
+    <span class="tag">&lt;loc&gt;</span>https://example.com/blog/dog-training<span class="tag">&lt;/loc&gt;</span>
+    <span class="tag">&lt;lastmod&gt;</span>2024-03-10<span class="tag">&lt;/lastmod&gt;</span>
+    <span class="tag">&lt;priority&gt;</span>0.8<span class="tag">&lt;/priority&gt;</span>
+  <span class="tag">&lt;/url&gt;</span>
+
+<span class="tag">&lt;/urlset&gt;</span>
+      </div>
+    </div>
+
+    <!-- HTTPS + MOBILE -->
+    <div class="two-col">
+      <div class="annotation-box" data-label="🔒 HTTPS">
+        <h3 style="font-family:var(--mono); font-size:1rem; margin-bottom:0.5rem;">HTTPS (SSL Certificate)</h3>
+        <p style="font-size:14px; color:#444;">Google confirmed HTTPS as a ranking signal in 2014. Chrome marks HTTP sites as "Not Secure." Every site must use HTTPS. Get a free SSL cert from Let's Encrypt or your host.</p>
+        <div class="callout" style="margin-top:0.8rem; font-size:13px;">
+          Also: ensure HTTP redirects to HTTPS. www redirects to non-www (or vice versa). One canonical version of every URL.
+        </div>
+      </div>
+      <div class="annotation-box blue" data-label="📱 MOBILE-FIRST">
+        <h3 style="font-family:var(--mono); font-size:1rem; margin-bottom:0.5rem;">Mobile-First Indexing</h3>
+        <p style="font-size:14px; color:#444;">Google uses the mobile version of your site for indexing and ranking (since 2019). If your mobile site is missing content that the desktop has, you won't rank for it.</p>
+        <ul class="checklist" style="margin-top:0.8rem; font-size:13px;">
+          <li><span class="check-icon">✅</span> Responsive design</li>
+          <li><span class="check-icon">✅</span> Same content on mobile/desktop</li>
+          <li><span class="check-icon">✅</span> Touch-friendly tap targets (48px min)</li>
+          <li><span class="check-icon">✅</span> No horizontal scrolling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CORE TECHNICAL FACTORS TABLE -->
+    <div class="annotation-box" data-label="TECHNICAL SEO CHECKLIST">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Top Technical SEO Factors</h3>
+      <table class="seo-table">
+        <tr><th>Factor</th><th>What to Check</th><th>Impact</th></tr>
+        <tr><td>Crawl Errors</td><td>Google Search Console → Coverage report → Fix 4xx/5xx errors</td><td class="highlight-red">Critical</td></tr>
+        <tr><td>Page Speed</td><td>LCP &lt; 2.5s, INP &lt; 200ms, CLS &lt; 0.1</td><td class="highlight-red">Critical</td></tr>
+        <tr><td>Duplicate Content</td><td>Use canonical tags. Check for www/https duplication.</td><td class="highlight-yellow">High</td></tr>
+        <tr><td>Orphan Pages</td><td>Pages with no internal links. Google can't find them.</td><td class="highlight-yellow">High</td></tr>
+        <tr><td>Structured Data</td><td>No errors in Google Rich Results Test</td><td class="highlight-yellow">High</td></tr>
+        <tr><td>Redirect Chains</td><td>A→B→C should be A→C. Each hop loses ~15% link equity.</td><td class="highlight-yellow">Medium</td></tr>
+        <tr><td>Hreflang</td><td>For multi-language sites. Ensures right language shown to right country.</td><td class="highlight-yellow">Medium</td></tr>
+        <tr><td>Log File Analysis</td><td>Check what Googlebot is actually crawling. Fix crawl waste.</td><td class="highlight-yellow">Medium</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 4: KEYWORD RESEARCH
+  ══════════════════════════════════════════════════ -->
+  <section id="keywords" class="main-section">
+    <div class="section-header">
+      <div class="section-number">03 / 10 — KEYWORD RESEARCH</div>
+      <h2 class="section-title">Finding what people actually<br>type into Google</h2>
+      <p class="section-subtitle">Keywords aren't just words — they represent intent. Understanding why someone searches is more important than what they search.</p>
+    </div>
+
+    <!-- KEYWORD TYPES -->
+    <div class="annotation-box" data-label="🔑 KEYWORD TYPES">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">The Keyword Landscape</h3>
+      <div class="keyword-map">
+        <span class="keyword-pill primary">puppy training</span>
+        <span class="keyword-pill primary">dog training tips</span>
+        <span class="keyword-pill primary">how to train a dog</span>
+        <span class="keyword-pill secondary">positive reinforcement dog training</span>
+        <span class="keyword-pill secondary">puppy obedience training</span>
+        <span class="keyword-pill lsi">dog behavior</span>
+        <span class="keyword-pill lsi">clicker training</span>
+        <span class="keyword-pill lsi">treat-based training</span>
+        <span class="keyword-pill long">how to train a puppy not to bite</span>
+        <span class="keyword-pill long">puppy training schedule 8 weeks</span>
+        <span class="keyword-pill long">how long does puppy training take</span>
+      </div>
+      <div style="display:flex; gap:1rem; margin-top:1rem; flex-wrap:wrap; font-size:13px;">
+        <div><span class="keyword-pill primary" style="margin-right:6px;">■</span> Primary (head) keyword — High volume, high competition</div>
+        <div><span class="keyword-pill secondary" style="margin-right:6px;">■</span> Secondary keyword — Medium volume, more specific</div>
+        <div><span class="keyword-pill lsi" style="margin-right:6px;">■</span> LSI / semantic terms — Related concepts Google expects to see</div>
+        <div><span class="keyword-pill long" style="margin-right:6px;">■</span> Long-tail — Low volume but HIGH intent, easy to rank</div>
+      </div>
+    </div>
+
+    <!-- SEARCH INTENT -->
+    <div class="annotation-box blue" data-label="🎯 SEARCH INTENT — THE MOST IMPORTANT CONCEPT IN SEO">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Search Intent — Why Google's #1 Priority is Intent</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Google's entire goal is to match the searcher's intent. If you write a blog post for a keyword where people want to buy something, you won't rank — even with perfect SEO. Intent must match content type.</p>
+
+      <table class="seo-table">
+        <tr><th>Intent Type</th><th>Example Query</th><th>What User Wants</th><th>Best Content Type</th></tr>
+        <tr>
+          <td><strong>Informational</strong></td>
+          <td>"how to train a puppy"</td>
+          <td>Learn something</td>
+          <td>Blog post, guide, video</td>
+        </tr>
+        <tr>
+          <td><strong>Navigational</strong></td>
+          <td>"Petco puppy classes"</td>
+          <td>Find specific site/page</td>
+          <td>Brand's homepage or specific page</td>
+        </tr>
+        <tr>
+          <td><strong>Commercial</strong></td>
+          <td>"best puppy training books"</td>
+          <td>Research before buying</td>
+          <td>Comparison, review, listicle</td>
+        </tr>
+        <tr>
+          <td><strong>Transactional</strong></td>
+          <td>"buy dog training collar"</td>
+          <td>Purchase now</td>
+          <td>Product page, category page</td>
+        </tr>
+        <tr>
+          <td><strong>Local</strong></td>
+          <td>"puppy training classes near me"</td>
+          <td>Find local service</td>
+          <td>Local landing page + Google Business Profile</td>
+        </tr>
+      </table>
+
+      <div class="callout warn">
+        <strong>Test:</strong> Google your target keyword. Look at the top 10 results. What type of content is ranking? That tells you what Google considers the right intent match. Create that type of content.
+      </div>
+    </div>
+
+    <!-- KEYWORD METRICS -->
+    <div class="annotation-box green" data-label="📊 KEYWORD METRICS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">What Makes a Good Keyword Target?</h3>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-card-num">Volume</div>
+          <h3>Monthly Search Volume</h3>
+          <p>How many people search this per month. Higher = more potential traffic. But high volume = high competition. New sites should target 100–1,000 volume keywords.</p>
+          <div class="card-tag">Tool: Ahrefs, Semrush, Google Keyword Planner</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">KD</div>
+          <h3>Keyword Difficulty</h3>
+          <p>0–100 score. How hard to rank #1. Determined mainly by backlinks to top-ranking pages. New sites: target KD under 20. Established sites: up to 60.</p>
+          <div class="card-tag">Score from 0 (easy) to 100 (impossible)</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">CPC</div>
+          <h3>Cost Per Click</h3>
+          <p>What advertisers pay per click in Google Ads. High CPC = high commercial value. Great proxy for keywords worth ranking for organically.</p>
+          <div class="card-tag">"Insurance" CPC = $60+ per click</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-card-num">CTR</div>
+          <h3>Click-Through Rate</h3>
+          <p>Position 1 gets ~28% of clicks. Position 10 gets ~2%. Featured snippets can steal clicks without users visiting. Factor this into priority.</p>
+          <div class="card-tag">Average CTR drops 90% from pos 1 to pos 10</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEYWORD RESEARCH PROCESS -->
+    <div class="annotation-box" data-label="HOW TO DO KEYWORD RESEARCH">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">The Keyword Research Process (Step by Step)</h3>
+      <ol style="padding-left:1.5rem; font-size:15px; line-height:2.2;">
+        <li><strong>Seed keywords</strong> — brainstorm 5–10 broad topics your site covers</li>
+        <li><strong>Expand</strong> — use Ahrefs/Semrush to find related keywords, questions, and autocomplete variations</li>
+        <li><strong>Analyze intent</strong> — Google each keyword. What's ranking? Match that format.</li>
+        <li><strong>Filter by volume + difficulty</strong> — sweet spot is decent volume + low difficulty</li>
+        <li><strong>Group by topic</strong> — cluster related keywords. One page targets one keyword cluster, not 50 separate keywords.</li>
+        <li><strong>Map to pages</strong> — assign keyword clusters to existing or new pages. Never target same keyword on two pages (keyword cannibalization).</li>
+        <li><strong>Prioritize</strong> — quick wins first (low difficulty, decent volume)</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 5: LINKS
+  ══════════════════════════════════════════════════ -->
+  <section id="links" class="main-section">
+    <div class="section-header">
+      <div class="section-number">04 / 10 — LINK BUILDING</div>
+      <h2 class="section-title">Why links are votes,<br>and votes still win elections</h2>
+      <p class="section-subtitle">Backlinks are the backbone of Google's algorithm. A link from another site = a vote of trust. Not all votes are equal — quality crushes quantity.</p>
+    </div>
+
+    <!-- PAGERANK EXPLAINED -->
+    <div class="annotation-box" data-label="🏆 PAGERANK — HOW GOOGLE SCORES LINKS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">PageRank: The Original Google Algorithm</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Larry Page invented PageRank: pages that get more/better links are more authoritative. Google still uses a refined version of this. A link from NYTimes.com carries more weight than 1,000 links from random blogs.</p>
+
+      <div style="border:var(--border); background:white; padding:1.5rem; text-align:center; font-family:var(--mono); font-size:13px;">
+        <div style="display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:wrap;">
+          <div style="border:2px solid var(--accent2); padding:1rem; min-width:120px;">
+            <div style="font-size:0.8rem; color:#666;">AUTHORITY SITE</div>
+            <div style="font-size:1.5rem; font-weight:700; color:var(--accent2);">DR 90</div>
+            <div style="font-size:0.8rem;">e.g. Wikipedia</div>
+          </div>
+          <div style="font-size:2rem; color:var(--accent);">→ link →</div>
+          <div style="border:2px solid #1a8c4a; padding:1rem; min-width:120px;">
+            <div style="font-size:0.8rem; color:#666;">YOUR PAGE</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#1a8c4a;">+BIG BOOST</div>
+            <div style="font-size:0.8rem;">ranking ↑↑↑</div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:wrap;">
+          <div style="border:2px dashed #ccc; padding:1rem; min-width:120px;">
+            <div style="font-size:0.8rem; color:#666;">RANDOM BLOG</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#ccc;">DR 5</div>
+            <div style="font-size:0.8rem;">× 1,000 links</div>
+          </div>
+          <div style="font-size:2rem; color:#ccc;">→ links →</div>
+          <div style="border:2px dashed #ccc; padding:1rem; min-width:120px;">
+            <div style="font-size:0.8rem; color:#666;">YOUR PAGE</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#999;">+SMALL</div>
+            <div style="font-size:0.8rem;">or even PENALTY</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANCHOR TEXT -->
+    <div class="annotation-box blue" data-label="⚓ ANCHOR TEXT — THE TEXT OF LINKS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Anchor Text — The Words Used to Link</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">The clickable text of a link tells Google what the destination page is about. A link saying "puppy training guide" to your page tells Google your page is about puppy training.</p>
+
+      <table class="seo-table">
+        <tr><th>Anchor Type</th><th>Example</th><th>SEO Value</th></tr>
+        <tr><td><strong>Exact match</strong></td><td>"puppy training tips"</td><td>High — but over-optimizing triggers penalty</td></tr>
+        <tr><td><strong>Partial match</strong></td><td>"these puppy training resources"</td><td>High — safer, more natural</td></tr>
+        <tr><td><strong>Branded</strong></td><td>"DogPro Academy"</td><td>Medium — builds brand authority</td></tr>
+        <tr><td><strong>Generic</strong></td><td>"click here", "read more"</td><td>Low — avoid</td></tr>
+        <tr><td><strong>URL</strong></td><td>"https://example.com"</td><td>Low signal but natural</td></tr>
+        <tr><td><strong>Image alt</strong></td><td>[alt text of linked image]</td><td>Google uses alt text as anchor</td></tr>
+      </table>
+
+      <div class="callout warn">
+        <strong>Penguin Penalty:</strong> If 80%+ of backlinks use exact-match anchor text, Google suspects manipulation and may penalize. Natural link profiles are diverse.
+      </div>
+    </div>
+
+    <!-- INTERNAL LINKING -->
+    <div class="annotation-box green" data-label="🔗 INTERNAL LINKING STRATEGY">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Internal Links — Often the Most Overlooked SEO Lever</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Internal links distribute "link equity" across your site. They also tell Google which pages are most important (more internal links = more important). Use them strategically.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="callout" style="margin-bottom:1rem;">
+            <strong>Pillar Page Model:</strong><br>
+            1 main "pillar" page on broad topic → links to many specific "cluster" pages → cluster pages link back to pillar. This signals topical authority.
+          </div>
+        </div>
+        <div>
+          <ul class="checklist">
+            <li><span class="check-icon">✅</span> Link from high-authority pages to new pages</li>
+            <li><span class="check-icon">✅</span> Use descriptive, keyword-rich anchor text</li>
+            <li><span class="check-icon">✅</span> Every page should have at least 2–3 internal links pointing to it</li>
+            <li><span class="check-icon">❌</span> Don't use nofollow on internal links</li>
+            <li><span class="check-icon">❌</span> Don't link the same anchor to two different pages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINK BUILDING TACTICS -->
+    <div class="annotation-box" data-label="🏗️ LINK BUILDING TACTICS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">How to Actually Get Backlinks</h3>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <h3>Digital PR</h3>
+          <p>Create data-driven studies, surveys, or original research. Journalists link to original data. One study can generate hundreds of links.</p>
+          <div class="card-tag">Difficulty: Hard | Quality: Very High</div>
+        </div>
+        <div class="concept-card">
+          <h3>Guest Posting</h3>
+          <p>Write articles for other sites in your niche. Include a link back. Google accepts this if done in moderation with genuine value.</p>
+          <div class="card-tag">Difficulty: Medium | Quality: Medium</div>
+        </div>
+        <div class="concept-card">
+          <h3>Broken Link Building</h3>
+          <p>Find broken links on other sites. Offer your content as replacement. Win-win: they fix a broken link, you get a backlink.</p>
+          <div class="card-tag">Difficulty: Medium | Quality: High</div>
+        </div>
+        <div class="concept-card">
+          <h3>Skyscraper Technique</h3>
+          <p>Find content with many backlinks. Create a better version. Ask people linking to original to link to yours instead.</p>
+          <div class="card-tag">Difficulty: Hard | Quality: High</div>
+        </div>
+        <div class="concept-card">
+          <h3>Resource Pages</h3>
+          <p>Find pages that list resources in your niche. Ask to be added. "dog training resources" + site:edu often works well.</p>
+          <div class="card-tag">Difficulty: Easy | Quality: Medium</div>
+        </div>
+        <div class="concept-card">
+          <h3>HARO / Qwoted</h3>
+          <p>Journalists ask for expert sources. Respond quickly with genuine expertise. Can earn links from major publications.</p>
+          <div class="card-tag">Difficulty: Medium | Quality: Very High</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 6: CONTENT STRATEGY
+  ══════════════════════════════════════════════════ -->
+  <section id="content" class="main-section">
+    <div class="section-header">
+      <div class="section-number">05 / 10 — CONTENT STRATEGY</div>
+      <h2 class="section-title">E-E-A-T: Google's quality<br>framework for ranking</h2>
+      <p class="section-subtitle">Google wants to rank content from people with real experience, expertise, authority, and trustworthiness. This is E-E-A-T — the framework behind every quality assessment.</p>
+    </div>
+
+    <!-- EEAT -->
+    <div class="annotation-box" data-label="⭐ E-E-A-T FRAMEWORK">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Experience · Expertise · Authoritativeness · Trustworthiness</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0; border:var(--border);">
+        <div style="padding:1.2rem; border-right:var(--border); background:white;">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🧪</div>
+          <strong>Experience</strong>
+          <p style="font-size:13px; margin-top:0.4rem; color:#555;">Did the author actually DO the thing? A review of hiking boots written by someone who hiked 100 miles in them > review by someone who never wore them.</p>
+        </div>
+        <div style="padding:1.2rem; border-right:var(--border); background:var(--cream);">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🎓</div>
+          <strong>Expertise</strong>
+          <p style="font-size:13px; margin-top:0.4rem; color:#555;">Does the author have credentials, skills, or knowledge? Medical content by doctors, legal content by lawyers. Display credentials clearly.</p>
+        </div>
+        <div style="padding:1.2rem; border-right:var(--border); background:white;">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🏛️</div>
+          <strong>Authoritativeness</strong>
+          <p style="font-size:13px; margin-top:0.4rem; color:#555;">Is the author and site recognized as an authority? Backlinks from credible sites, mentions in media, citations by other experts — all build this.</p>
+        </div>
+        <div style="padding:1.2rem; background:var(--cream);">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🔒</div>
+          <strong>Trustworthiness</strong>
+          <p style="font-size:13px; margin-top:0.4rem; color:#555;">Most important factor. HTTPS, clear contact info, privacy policy, accurate content, no hidden ads. Trust is foundational.</p>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:1rem;">
+        <strong>YMYL (Your Money or Your Life):</strong> Health, finance, legal, safety topics get extra scrutiny. Google holds these to the highest E-E-A-T standards because bad information can directly harm users. If your site is YMYL, E-E-A-T isn't optional.
+      </div>
+    </div>
+
+    <!-- CONTENT LENGTH + DEPTH -->
+    <div class="annotation-box blue" data-label="📝 CONTENT DEPTH vs LENGTH">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Content Depth — Not Length, but Coverage</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Word count is not a ranking factor. Depth of coverage is. A 500-word article that perfectly answers a query beats a 5,000-word one that rambles. But complex topics naturally require more words.</p>
+
+      <table class="seo-table">
+        <tr><th>Content Type</th><th>Typical Length</th><th>Priority</th></tr>
+        <tr><td>Blog post / Guide</td><td>1,500–3,000 words</td><td>Cover all subtopics. Include images, examples.</td></tr>
+        <tr><td>Product page</td><td>300–800 words</td><td>Specs, benefits, reviews. Clear CTA.</td></tr>
+        <tr><td>Homepage</td><td>300–500 words</td><td>Clear value proposition. Internal links to key pages.</td></tr>
+        <tr><td>Category page</td><td>200–400 words intro + products</td><td>Useful intro + subcategory links + products</td></tr>
+        <tr><td>Pillar page</td><td>3,000–8,000 words</td><td>Comprehensive. Links to all cluster pages.</td></tr>
+        <tr><td>FAQ page</td><td>1,000–2,000 words</td><td>Target PAA (People Also Ask) questions</td></tr>
+      </table>
+    </div>
+
+    <!-- CONTENT FRESHNESS -->
+    <div class="annotation-box green" data-label="🔄 CONTENT FRESHNESS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Freshness — Why Updating Content Beats Creating New Content</h3>
+      <p style="font-size:15px; margin-bottom:1rem;">Google's QDF (Query Deserves Freshness) algorithm boosts fresh content for time-sensitive topics. But even evergreen content benefits from regular updates — it shows Google the page is maintained.</p>
+      <ul class="checklist">
+        <li><span class="check-icon">✅</span> Update publish date when content is substantially updated (not just for show)</li>
+        <li><span class="check-icon">✅</span> Add new sections when topic evolves. Don't delete old content unless it's wrong.</li>
+        <li><span class="check-icon">✅</span> Use lastmod in sitemap to tell Google when pages were updated</li>
+        <li><span class="check-icon">✅</span> Regular audits: find pages losing traffic and refresh them</li>
+        <li><span class="check-icon">❌</span> Don't change the date without updating content — Google detects this</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 7: SCHEMA MARKUP
+  ══════════════════════════════════════════════════ -->
+  <section id="schema" class="main-section">
+    <div class="section-header">
+      <div class="section-number">06 / 10 — SCHEMA MARKUP</div>
+      <h2 class="section-title">Structured data: speaking<br>Google's native language</h2>
+      <p class="section-subtitle">Schema markup is code you add to tell Google EXACTLY what your content means. It unlocks rich results — enhanced SERP listings with stars, prices, FAQs, and more.</p>
+    </div>
+
+    <!-- WHAT IT DOES -->
+    <div class="annotation-box" data-label="✨ RICH RESULTS — WHAT SCHEMA UNLOCKS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">What Rich Results Look Like in Google</h3>
+
+      <!-- FAQ Rich Result -->
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:var(--mono); font-size:11px; color:#666; margin-bottom:0.5rem;">→ FAQ Rich Result (from FAQ Schema)</div>
+        <div class="serp-result">
+          <div class="serp-url">bestdogtraining.com › guide</div>
+          <div class="serp-title">How to Train a Puppy — Complete Guide 2024</div>
+          <div class="serp-desc">The definitive guide to training your puppy using positive reinforcement methods...</div>
+          <div class="serp-rich">
+            <div class="serp-rich-title">People also ask</div>
+            <div class="serp-faq-item">▸ How long does puppy training take?</div>
+            <div class="serp-faq-item">▸ When should I start training my puppy?</div>
+            <div class="serp-faq-item">▸ What are the basic dog training commands?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipe Rich Result -->
+      <div>
+        <div style="font-family:var(--mono); font-size:11px; color:#666; margin-bottom:0.5rem;">→ Recipe Rich Result (from Recipe Schema)</div>
+        <div class="serp-result">
+          <div class="serp-url">cookingblog.com</div>
+          <div style="display:flex; gap:1rem; margin-top:0.3rem;">
+            <div style="width:80px; height:60px; background:#f0e8d8; border:1px solid #ddd; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0;">🍝</div>
+            <div>
+              <div class="serp-title">Best Spaghetti Carbonara Recipe</div>
+              <div style="font-size:12px; color:#555;">⭐⭐⭐⭐⭐ 4.9 (2,341 reviews) · 25 mins · 450 cal</div>
+              <div class="serp-desc" style="margin-top:0.2rem;">Authentic Roman carbonara with eggs, pecorino, guanciale...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON-LD EXAMPLES -->
+    <div class="annotation-box blue" data-label="</> SCHEMA CODE EXAMPLES">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Common Schema Types + Code</h3>
+
+      <p style="font-size:14px; margin-bottom:0.8rem; color:#444;">Always use JSON-LD format (Google's preferred method). Place in <code style="background:#eee; padding:1px 4px;">&lt;script type="application/ld+json"&gt;</code> in the &lt;head&gt;.</p>
+
+      <div class="schema-box">
+<span class="schema-comment">// ① FAQ Schema — Unlocks FAQ rich results</span>
+{
+  <span class="schema-key">"@context"</span>: <span class="schema-str">"https://schema.org"</span>,
+  <span class="schema-key">"@type"</span>: <span class="schema-str">"FAQPage"</span>,
+  <span class="schema-key">"mainEntity"</span>: [{
+    <span class="schema-key">"@type"</span>: <span class="schema-str">"Question"</span>,
+    <span class="schema-key">"name"</span>: <span class="schema-str">"How long does puppy training take?"</span>,
+    <span class="schema-key">"acceptedAnswer"</span>: {
+      <span class="schema-key">"@type"</span>: <span class="schema-str">"Answer"</span>,
+      <span class="schema-key">"text"</span>: <span class="schema-str">"Basic commands typically take 1–3 weeks..."</span>
+    }
+  }]
+}
+
+<span class="schema-comment">// ② Article Schema — Establishes author, date, publisher</span>
+{
+  <span class="schema-key">"@context"</span>: <span class="schema-str">"https://schema.org"</span>,
+  <span class="schema-key">"@type"</span>: <span class="schema-str">"Article"</span>,
+  <span class="schema-key">"headline"</span>: <span class="schema-str">"How to Train a Puppy"</span>,
+  <span class="schema-key">"author"</span>: {
+    <span class="schema-key">"@type"</span>: <span class="schema-str">"Person"</span>,
+    <span class="schema-key">"name"</span>: <span class="schema-str">"Dr. Sarah Mitchell"</span>,
+    <span class="schema-key">"url"</span>: <span class="schema-str">"https://example.com/authors/sarah-mitchell"</span>
+  },
+  <span class="schema-key">"datePublished"</span>: <span class="schema-str">"2024-01-15"</span>,
+  <span class="schema-key">"dateModified"</span>: <span class="schema-str">"2024-03-15"</span>
+}
+
+<span class="schema-comment">// ③ BreadcrumbList Schema — Shows path in SERP</span>
+{
+  <span class="schema-key">"@context"</span>: <span class="schema-str">"https://schema.org"</span>,
+  <span class="schema-key">"@type"</span>: <span class="schema-str">"BreadcrumbList"</span>,
+  <span class="schema-key">"itemListElement"</span>: [
+    { <span class="schema-key">"@type"</span>: <span class="schema-str">"ListItem"</span>, <span class="schema-key">"position"</span>: 1, <span class="schema-key">"name"</span>: <span class="schema-str">"Home"</span>, <span class="schema-key">"item"</span>: <span class="schema-str">"https://example.com"</span> },
+    { <span class="schema-key">"@type"</span>: <span class="schema-str">"ListItem"</span>, <span class="schema-key">"position"</span>: 2, <span class="schema-key">"name"</span>: <span class="schema-str">"Guides"</span>, <span class="schema-key">"item"</span>: <span class="schema-str">"https://example.com/guides"</span> },
+    { <span class="schema-key">"@type"</span>: <span class="schema-str">"ListItem"</span>, <span class="schema-key">"position"</span>: 3, <span class="schema-key">"name"</span>: <span class="schema-str">"Puppy Training"</span> }
+  ]
+}
+
+<span class="schema-comment">// ④ Product Schema — Shows price, reviews, availability in SERP</span>
+{
+  <span class="schema-key">"@type"</span>: <span class="schema-str">"Product"</span>,
+  <span class="schema-key">"name"</span>: <span class="schema-str">"Dog Training Clicker"</span>,
+  <span class="schema-key">"offers"</span>: { <span class="schema-key">"@type"</span>: <span class="schema-str">"Offer"</span>, <span class="schema-key">"price"</span>: <span class="schema-str">"9.99"</span>, <span class="schema-key">"priceCurrency"</span>: <span class="schema-str">"USD"</span>, <span class="schema-key">"availability"</span>: <span class="schema-str">"InStock"</span> },
+  <span class="schema-key">"aggregateRating"</span>: { <span class="schema-key">"@type"</span>: <span class="schema-str">"AggregateRating"</span>, <span class="schema-key">"ratingValue"</span>: <span class="schema-str">"4.8"</span>, <span class="schema-key">"reviewCount"</span>: <span class="schema-str">"1247"</span> }
+}
+      </div>
+
+      <div class="callout green" style="margin-top:1rem;">
+        <strong>Test your schema:</strong> Use Google's Rich Results Test (search.google.com/test/rich-results) to verify schema is valid before publishing.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 8: LOCAL SEO
+  ══════════════════════════════════════════════════ -->
+  <section id="local" class="main-section">
+    <div class="section-header">
+      <div class="section-number">07 / 10 — LOCAL SEO</div>
+      <h2 class="section-title">Ranking in your city,<br>your neighborhood, your street</h2>
+      <p class="section-subtitle">For businesses serving a local area, local SEO is often more valuable than regular SEO. "Near me" searches convert at extremely high rates.</p>
+    </div>
+
+    <div class="annotation-box" data-label="📍 LOCAL SEO PILLARS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">The 3 Local Ranking Factors</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:0; border:var(--border);">
+        <div style="padding:1.2rem; border-right:var(--border); background:white;">
+          <strong style="font-size:1.1rem;">📏 Proximity</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">Physical distance between searcher and business. You can't control this — but you can ensure your address is accurate everywhere.</p>
+        </div>
+        <div style="padding:1.2rem; border-right:var(--border); background:var(--cream);">
+          <strong style="font-size:1.1rem;">⭐ Prominence</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">How well-known the business is. Reviews, backlinks from local sites, mentions, citations in directories all build prominence.</p>
+        </div>
+        <div style="padding:1.2rem; background:white;">
+          <strong style="font-size:1.1rem;">🎯 Relevance</strong>
+          <p style="font-size:13px; margin-top:0.5rem; color:#555;">Does your Google Business Profile and website match what the user is searching for? Correct categories, services, and keywords.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="annotation-box blue" data-label="🗂️ GOOGLE BUSINESS PROFILE">
+        <h3 style="font-family:var(--mono); font-size:1rem; margin-bottom:0.5rem;">Google Business Profile (GBP)</h3>
+        <p style="font-size:14px; color:#444; margin-bottom:0.8rem;">Free tool. Controls your "Map Pack" listing. Most important local SEO asset. Claim it at business.google.com.</p>
+        <ul class="checklist" style="font-size:13px;">
+          <li><span class="check-icon">✅</span> Complete all fields (100% profile)</li>
+          <li><span class="check-icon">✅</span> Choose correct primary category</li>
+          <li><span class="check-icon">✅</span> Add all services + descriptions</li>
+          <li><span class="check-icon">✅</span> Upload real photos (businesses with photos get 35% more clicks)</li>
+          <li><span class="check-icon">✅</span> Post weekly updates (like social media)</li>
+          <li><span class="check-icon">✅</span> Respond to every review (positive AND negative)</li>
+          <li><span class="check-icon">✅</span> Add Q&A section answers</li>
+        </ul>
+      </div>
+      <div class="annotation-box green" data-label="📋 NAP CONSISTENCY">
+        <h3 style="font-family:var(--mono); font-size:1rem; margin-bottom:0.5rem;">NAP: Name, Address, Phone</h3>
+        <p style="font-size:14px; color:#444; margin-bottom:0.8rem;">Your business name, address, and phone must be IDENTICAL everywhere on the web. Inconsistencies confuse Google and hurt local rankings.</p>
+        <ul class="checklist" style="font-size:13px;">
+          <li><span class="check-icon">📍</span> Website footer</li>
+          <li><span class="check-icon">📍</span> Google Business Profile</li>
+          <li><span class="check-icon">📍</span> Yelp, TripAdvisor, Yellow Pages</li>
+          <li><span class="check-icon">📍</span> Apple Maps, Bing Places</li>
+          <li><span class="check-icon">📍</span> Industry-specific directories</li>
+          <li><span class="check-icon">📍</span> Social media profiles</li>
+        </ul>
+        <div class="callout warn" style="margin-top:0.8rem; font-size:13px;">
+          "Suite 100" vs "Ste 100" vs "Ste. 100" are different to Google's parser. Pick one format.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 9: CORE WEB VITALS
+  ══════════════════════════════════════════════════ -->
+  <section id="speed" class="main-section">
+    <div class="section-header">
+      <div class="section-number">08 / 10 — CORE WEB VITALS</div>
+      <h2 class="section-title">Page experience: Google<br>now ranks how pages feel</h2>
+      <p class="section-subtitle">Since 2021, Google uses Core Web Vitals as a ranking signal. Speed isn't just good UX — it's a ranking factor. These are the three metrics you must optimize.</p>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-score green">LCP</div>
+        <div class="metric-label">Largest Contentful Paint</div>
+        <div class="metric-desc">Time to render the largest visible element. Target: under 2.5 seconds. Usually: hero image or H1.</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:11px; font-family:var(--mono); color:#1a8c4a;">GOOD: &lt; 2.5s</div>
+          <div class="meter-bar"><div class="meter-fill good" style="width:75%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:#b86a00;">NEEDS WORK: 2.5–4s</div>
+          <div class="meter-bar"><div class="meter-fill ok" style="width:50%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:var(--accent);">POOR: &gt; 4s</div>
+          <div class="meter-bar"><div class="meter-fill bad" style="width:25%"></div></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-score orange">INP</div>
+        <div class="metric-label">Interaction to Next Paint</div>
+        <div class="metric-desc">How fast page responds to clicks/taps. Replaced FID in 2024. Target: under 200ms. Usually: JavaScript blocking.</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:11px; font-family:var(--mono); color:#1a8c4a;">GOOD: &lt; 200ms</div>
+          <div class="meter-bar"><div class="meter-fill good" style="width:75%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:#b86a00;">NEEDS WORK: 200–500ms</div>
+          <div class="meter-bar"><div class="meter-fill ok" style="width:50%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:var(--accent);">POOR: &gt; 500ms</div>
+          <div class="meter-bar"><div class="meter-fill bad" style="width:25%"></div></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-score green">CLS</div>
+        <div class="metric-label">Cumulative Layout Shift</div>
+        <div class="metric-desc">Visual stability. Elements jumping around as page loads. Target: under 0.1. Usually: images without dimensions, late-loading ads.</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:11px; font-family:var(--mono); color:#1a8c4a;">GOOD: &lt; 0.1</div>
+          <div class="meter-bar"><div class="meter-fill good" style="width:75%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:#b86a00;">NEEDS WORK: 0.1–0.25</div>
+          <div class="meter-bar"><div class="meter-fill ok" style="width:50%"></div></div>
+          <div style="font-size:11px; font-family:var(--mono); color:var(--accent);">POOR: &gt; 0.25</div>
+          <div class="meter-bar"><div class="meter-fill bad" style="width:25%"></div></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-score green">TTFB</div>
+        <div class="metric-label">Time to First Byte</div>
+        <div class="metric-desc">How fast server responds. Not a CWV but affects LCP. Target: under 800ms. Fix: better hosting, CDN, caching.</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:11px; font-family:var(--mono); color:#1a8c4a;">GOOD: &lt; 800ms</div>
+          <div class="meter-bar"><div class="meter-fill good" style="width:80%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation-box" data-label="⚡ HOW TO IMPROVE CORE WEB VITALS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Practical Fixes for Each Metric</h3>
+      <table class="seo-table">
+        <tr><th>Problem</th><th>Metric Affected</th><th>Fix</th></tr>
+        <tr><td>Slow hero image</td><td>LCP</td><td>Compress to WebP, preload hero image: &lt;link rel="preload" as="image"&gt;</td></tr>
+        <tr><td>Render-blocking JS</td><td>LCP, INP</td><td>Add defer/async to scripts. Move non-critical JS to bottom.</td></tr>
+        <tr><td>No image dimensions</td><td>CLS</td><td>Always set width + height attributes on every &lt;img&gt;</td></tr>
+        <tr><td>Late-loading fonts</td><td>CLS, LCP</td><td>Preconnect to font CDN. Use font-display: swap.</td></tr>
+        <tr><td>Large JavaScript bundle</td><td>INP</td><td>Code split. Remove unused JS. Lazy load below-fold components.</td></tr>
+        <tr><td>Slow hosting</td><td>TTFB, LCP</td><td>Use CDN (Cloudflare). Upgrade hosting. Enable caching.</td></tr>
+        <tr><td>Unoptimized images</td><td>LCP</td><td>Use srcset. Serve correct size per device. WebP format.</td></tr>
+      </table>
+      <div class="callout blue" style="margin-top:1rem;">
+        <strong>Measure:</strong> Use PageSpeed Insights (pagespeed.web.dev) + Chrome DevTools Lighthouse + Google Search Console → Core Web Vitals report
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 10: SERP FEATURES
+  ══════════════════════════════════════════════════ -->
+  <section id="serp" class="main-section">
+    <div class="section-header">
+      <div class="section-number">09 / 10 — SERP FEATURES</div>
+      <h2 class="section-title">Owning more real estate<br>on the results page</h2>
+      <p class="section-subtitle">Modern Google SERPs are full of features beyond the 10 blue links. Each feature has specific triggers. Understanding them lets you claim multiple positions at once.</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-card-num">Position 0</div>
+        <h3>Featured Snippet</h3>
+        <p>The answer box above all results. Triggered by question queries. Format your answer in: paragraph (what is X), numbered list (how to), or table (comparison). Put the direct answer in a &lt;p&gt; or &lt;ul&gt; immediately after the H2 question.</p>
+        <div class="card-tag">Trigger: "how to", "what is", "vs", definition queries</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-num">PAA</div>
+        <h3>People Also Ask</h3>
+        <p>Expandable question boxes. Infinite scroll of questions. Answer PAA questions in your content with exact question as H3, concise 40–60 word answer below, then detailed explanation. FAQ Schema accelerates this.</p>
+        <div class="card-tag">Trigger: questions related to main query</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-num">Map Pack</div>
+        <h3>Local Pack (3 Results)</h3>
+        <p>The map + 3 local business listings. Appears for local-intent queries. Driven by Google Business Profile + reviews + proximity. Separate from regular organic rankings.</p>
+        <div class="card-tag">Trigger: "near me", city + service queries</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-num">Image Pack</div>
+        <h3>Image Results</h3>
+        <p>Row of images inline in results. Win by: descriptive alt text, image filename, surrounding text context, fast load, correct image schema. Great for visual products and tutorials.</p>
+        <div class="card-tag">Trigger: visual topics, products, food, travel</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-num">Sitelinks</div>
+        <h3>Navigation Sitelinks</h3>
+        <p>Sub-links beneath your brand result. Automatically generated by Google based on your site structure and anchor text of internal links. Can't force them — build clear navigation instead.</p>
+        <div class="card-tag">Trigger: branded queries</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-num">KP</div>
+        <h3>Knowledge Panel</h3>
+        <p>Information box on the right side for brands, people, organizations. Built from Wikipedia, Wikidata, and your own structured data. Claim via Google Search Console for verified entities.</p>
+        <div class="card-tag">Trigger: brand/entity searches</div>
+      </div>
+    </div>
+
+    <!-- HOW TO OPTIMIZE FOR FEATURED SNIPPETS -->
+    <div class="annotation-box blue" data-label="🏆 HOW TO WIN FEATURED SNIPPETS">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">The Featured Snippet Formula</h3>
+      <div class="code-block">
+<span class="comment">&lt;!-- Optimized for "What is positive reinforcement dog training?" --&gt;</span>
+
+<span class="tag">&lt;h2&gt;</span>What is Positive Reinforcement Dog Training?<span class="tag">&lt;/h2&gt;</span>
+
+<span class="comment">&lt;!-- Paragraph snippet: Direct 40-50 word answer immediately after question --&gt;</span>
+<span class="tag">&lt;p&gt;</span>
+  Positive reinforcement dog training is a method where desired behaviors are 
+  rewarded immediately — with treats, praise, or play — causing the dog to 
+  repeat them. Unlike punishment-based methods, it builds trust and produces 
+  lasting behavioral changes.
+<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Then expand with full detailed content below --&gt;</span>
+<span class="tag">&lt;h3&gt;</span>How It Works<span class="tag">&lt;/h3&gt;</span>
+<span class="tag">&lt;p&gt;</span>When your dog sits on command and immediately receives a treat... [details]<span class="tag">&lt;/p&gt;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 10: ANALYTICS + MEASUREMENT
+  ══════════════════════════════════════════════════ -->
+  <section id="measure" class="main-section">
+    <div class="section-header">
+      <div class="section-number">10 / 10 — TOOLS & MEASUREMENT</div>
+      <h2 class="section-title">SEO without measurement<br>is just guessing</h2>
+      <p class="section-subtitle">Track what matters. Ignore vanity metrics. Focus on search impressions, clicks, rankings, and conversions — not just traffic volume.</p>
+    </div>
+
+    <!-- KEY METRICS -->
+    <div class="annotation-box" data-label="📊 WHAT TO MEASURE">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Essential SEO Metrics</h3>
+      <table class="seo-table">
+        <tr><th>Metric</th><th>Tool</th><th>What Good Looks Like</th></tr>
+        <tr><td><strong>Organic Traffic</strong></td><td>Google Analytics 4</td><td>Month-over-month growth. Segment by landing page.</td></tr>
+        <tr><td><strong>Impressions + CTR</strong></td><td>Google Search Console</td><td>Rising impressions = better rankings. Low CTR = fix title/description.</td></tr>
+        <tr><td><strong>Keyword Rankings</strong></td><td>Ahrefs / Semrush / GSC</td><td>Tracking your target keywords weekly. Focus on page 1.</td></tr>
+        <tr><td><strong>Backlink Profile</strong></td><td>Ahrefs / Moz</td><td>Domain Rating growth. Quality over quantity.</td></tr>
+        <tr><td><strong>Core Web Vitals</strong></td><td>GSC + PageSpeed Insights</td><td>All URLs in "Good" bucket. Zero "Poor" pages.</td></tr>
+        <tr><td><strong>Index Coverage</strong></td><td>Google Search Console</td><td>Zero errors. Valid pages count growing.</td></tr>
+        <tr><td><strong>Conversions from Organic</strong></td><td>GA4</td><td>The real goal. Track leads, sales, sign-ups from organic.</td></tr>
+      </table>
+    </div>
+
+    <!-- TOOLS TABLE -->
+    <div class="annotation-box blue" data-label="🛠️ THE SEO TOOLBOX">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">Free and Paid SEO Tools</h3>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <h3>Google Search Console</h3>
+          <p>Free. The most important SEO tool. See which queries bring traffic, index issues, Core Web Vitals, and which pages rank for what.</p>
+          <div class="card-tag">✅ FREE — Use this first</div>
+        </div>
+        <div class="concept-card">
+          <h3>Google Analytics 4</h3>
+          <p>Free. Tracks all website traffic, user behavior, conversions. Connect to Search Console for full picture.</p>
+          <div class="card-tag">✅ FREE — Essential</div>
+        </div>
+        <div class="concept-card">
+          <h3>Ahrefs</h3>
+          <p>Best-in-class backlink data, keyword research, content gap analysis, rank tracking. Industry standard for professionals.</p>
+          <div class="card-tag">💰 PAID — $99+/month</div>
+        </div>
+        <div class="concept-card">
+          <h3>Semrush</h3>
+          <p>All-in-one SEO suite. Competitor research, technical audit, keyword tracking, content optimization.</p>
+          <div class="card-tag">💰 PAID — $119+/month</div>
+        </div>
+        <div class="concept-card">
+          <h3>Screaming Frog</h3>
+          <p>Crawls your site like Google does. Finds broken links, duplicate content, missing meta tags, redirect chains.</p>
+          <div class="card-tag">Freemium — 500 URLs free</div>
+        </div>
+        <div class="concept-card">
+          <h3>PageSpeed Insights</h3>
+          <p>Free. Tests Core Web Vitals and gives specific recommendations to improve LCP, INP, CLS. Use for every page.</p>
+          <div class="card-tag">✅ FREE — pagespeed.web.dev</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL RANKING FACTORS SUMMARY -->
+    <div class="annotation-box" data-label="🏆 TOP RANKING FACTORS SUMMARY">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:1rem;">What Actually Moves the Needle</h3>
+
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Backlink Quality + Quantity</strong> — Domain authority, relevance of linking site, anchor text variety</div>
+        <div class="rf-impact critical">CRITICAL</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Content Relevance</strong> — Does page fully answer the search query? Does it match intent?</div>
+        <div class="rf-impact critical">CRITICAL</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>E-E-A-T Signals</strong> — Author credentials, site reputation, accurate information, trust signals</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Core Web Vitals</strong> — LCP, INP, CLS all in "Good" range</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>On-Page Optimization</strong> — Title, H1, URL, meta description, keyword usage</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Technical Health</strong> — Crawlability, indexability, no broken links, correct canonicals</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>User Engagement</strong> — Click-through rate, dwell time, pogo-sticking (bounce back to SERP)</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Mobile-Friendliness</strong> — Responsive design, touch targets, no intrusive popups</div>
+        <div class="rf-impact high">HIGH</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>HTTPS</strong> — SSL certificate, secure connection</div>
+        <div class="rf-impact rf-impact" style="background:#eee;">BASELINE</div>
+      </div>
+      <div class="ranking-factor">
+        <div class="rf-name"><strong>Structured Data</strong> — Schema markup for rich results</div>
+        <div class="rf-impact" style="background:var(--highlight4);">MEDIUM</div>
+      </div>
+    </div>
+
+    <!-- WHAT DOESNT MATTER -->
+    <div class="annotation-box warn" data-label="⚠️ SEO MYTHS — WHAT DOESN'T ACTUALLY MATTER">
+      <h3 style="font-family:var(--display); font-size:1.3rem; margin-bottom:0.8rem;">Debunked: What Doesn't Affect Rankings</h3>
+      <table class="seo-table">
+        <tr><th>Myth</th><th>Reality</th></tr>
+        <tr><td>Meta keywords tag</td><td>Google ignored it since 2009. Still shows up in old guides. Skip it.</td></tr>
+        <tr><td>Keyword density (% of page)</td><td>There's no ideal density. Write naturally. Don't count occurrences.</td></tr>
+        <tr><td>Submitting to Google</td><td>Googlebot finds your site via links. No need to submit unless using GSC sitemap.</td></tr>
+        <tr><td>More pages = better</td><td>Quality &gt; quantity. Thin pages hurt rankings. Content pruning often helps.</td></tr>
+        <tr><td>Google Ads boost organic</td><td>Paid and organic are completely separate. Running ads has zero SEO effect.</td></tr>
+        <tr><td>Social media rankings</td><td>Social signals are not a confirmed ranking factor. Indirect effects only (traffic, links).</td></tr>
+      </table>
+    </div>
+
+  </section>
+
+</div><!-- /container -->
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER — SEO-Optimized Example Footer
+═══════════════════════════════════════════════════════════ -->
+<footer id="site-footer" role="contentinfo">
+  <!-- #17: <footer role="contentinfo"> = semantic HTML = Google understands site structure -->
+  <div class="footer-inner">
+    <div class="footer-title">SEO Masterclass</div>
+    <p style="font-size:14px; color:rgba(245,240,232,0.6); margin-bottom:2rem; max-width:500px;">This page is itself an SEO lesson. Notice: semantic HTML structure, skip navigation, proper heading hierarchy, descriptive links, and structured footer with categorized links.</p>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>On-Page SEO</h4>
+        <ul>
+          <li>Title Tag Optimization</li>
+          <li>Meta Descriptions</li>
+          <li>Header Hierarchy</li>
+          <li>URL Structure</li>
+          <li>Image Optimization</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Technical SEO</h4>
+        <ul>
+          <li>Crawling & Indexing</li>
+          <li>XML Sitemaps</li>
+          <li>robots.txt</li>
+          <li>HTTPS & Security</li>
+          <li>Mobile-First</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Off-Page SEO</h4>
+        <ul>
+          <li>Link Building</li>
+          <li>Digital PR</li>
+          <li>Anchor Text Strategy</li>
+          <li>Internal Linking</li>
+          <li>E-E-A-T Signals</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Advanced</h4>
+        <ul>
+          <li>Schema Markup</li>
+          <li>Core Web Vitals</li>
+          <li>Local SEO</li>
+          <li>SERP Features</li>
+          <li>Analytics & Reporting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.1); margin-top:2rem; padding-top:1.5rem; font-family:var(--mono); font-size:11px; color:rgba(245,240,232,0.4); display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+      <span>© 2024 SEO Masterclass. Educational use.</span>
+      <span>Every element on this page is an SEO lesson.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Toggle annotation overlays on demo site
+  function toggleAnnotations(btn) {
+    const demo = document.getElementById('live-demo');
+    demo.classList.toggle('annotations-on');
+    btn.classList.toggle('active');
+    btn.textContent = demo.classList.contains('annotations-on')
+      ? '🔍 Show SEO Annotations'
+      : '👁️ Hide Annotations';
+  }
+
+  // Animate meters on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.meter-fill').forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => { bar.style.width = width; }, 100);
         });
+      }
+    });
+  }, { threshold: 0.3 });
 
-        // Drag & drop on logo area
-        const drop = document.getElementById('logoDrop');
-        drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
-        drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
-        drop.addEventListener('drop', e => {
-            e.preventDefault(); drop.classList.remove('drag-over');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) readBlob(file);
-        });
+  document.querySelectorAll('.metric-card').forEach(card => observer.observe(card));
 
-        function sync() {
-            const col = document.getElementById('color').value;
-            document.documentElement.style.setProperty('--primary', col);
-            document.getElementById('pOrg').innerText = document.getElementById('org').value || 'ORGANIZATION';
-            document.getElementById('pTitle').innerText = document.getElementById('role').value || 'Role Title';
-            document.getElementById('pTitle').style.color = col;
-            
-            const meta = [document.getElementById('type').value, document.getElementById('nature').value, document.getElementById('loc').value].filter(t => t);
-            document.getElementById('pMeta').innerHTML = meta.map(m => `<span class="tag" style="background:${col}15; color:${col}">${m}</span>`).join('');
-            
-            renderDynamic('topSections', 'pTop');
-            renderDynamic('botSections', 'pBot');
-            
-            const stip = document.getElementById('stipend').value; const ctc = document.getElementById('ctc').value;
-            document.getElementById('pInc').style.display = (stip || ctc) ? 'block' : 'none';
-            document.getElementById('pIncText').innerText = [stip, ctc].filter(v => v).join('\n');
-        }
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
 
-        function addSec(id) {
-            const div = document.createElement('div'); div.className = 'section-input';
-            div.innerHTML = `<input type="text" placeholder="Heading" class="h-in" oninput="sync()" value="Section Heading" style="font-weight:bold; margin-bottom:5px;"><textarea placeholder="Content..." class="t-in" oninput="sync()" rows="3"></textarea><button onclick="this.parentElement.remove();sync()" style="position:absolute; right:5px; top:5px; background:none; border:none; color:red; cursor:pointer;">&times;</button>`;
-            document.getElementById(id).appendChild(div); sync();
-        }
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}`
+        ? 'var(--highlight)'
+        : '';
+    });
+  });
+</script>
 
-        function renderDynamic(srcId, destId) {
-            const items = document.querySelectorAll(`#${srcId} .section-input`);
-            document.getElementById(destId).innerHTML = Array.from(items).map(i => `<h3 class="jd-section-h">${i.querySelector('.h-in').value}</h3><p style="white-space:pre-wrap; line-height:1.6; color:#444;">${i.querySelector('.t-in').value}</p>`).join('');
-        }
-
-        sync();
-    </script>
 </body>
 </html>
